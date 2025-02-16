@@ -12,16 +12,27 @@ config_version=5
 
 config/name="ncgw"
 config/version="1.0"
+run/main_scene="res://scenes/title_screen/title_screen.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://assets/art/icon.svg"
+
+[autoload]
+
+SoundManager="*res://addons/sound_manager/sound_manager.gd"
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/resizable=false
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
 
 [layer_names]
 
