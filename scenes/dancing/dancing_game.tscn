@@ -1,0 +1,149 @@
+[gd_scene load_steps=21 format=3 uid="uid://xfqq48b1q036"]
+
+[ext_resource type="Script" path="res://scripts/dancing/dancing_game.gd" id="1_kx0tl"]
+[ext_resource type="Script" path="res://scenes/dancing/round.gd" id="2_n085y"]
+[ext_resource type="Script" path="res://scenes/dancing/challenge.gd" id="3_g562o"]
+[ext_resource type="Script" path="res://scenes/dancing/steps_reader.gd" id="4_l0kwu"]
+[ext_resource type="Texture2D" uid="uid://de4cs8uyjtcvc" path="res://assets/art/dancer.png" id="5_4ud33"]
+[ext_resource type="FontFile" uid="uid://m3wbmrled4kn" path="res://assets/fonts/kenney/kenney_mini.ttf" id="5_rqbkh"]
+
+[sub_resource type="Resource" id="Resource_wym73"]
+script = ExtResource("2_n085y")
+steps = Array[int]([2])
+
+[sub_resource type="Resource" id="Resource_4eo6t"]
+script = ExtResource("2_n085y")
+steps = Array[int]([2, 2])
+
+[sub_resource type="Resource" id="Resource_hwnqi"]
+script = ExtResource("2_n085y")
+steps = Array[int]([2, 0, 1, 3, 4])
+
+[sub_resource type="Resource" id="Resource_wqjf4"]
+script = ExtResource("3_g562o")
+rounds = Array[ExtResource("2_n085y")]([SubResource("Resource_wym73"), SubResource("Resource_4eo6t"), SubResource("Resource_hwnqi")])
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6ilx"]
+atlas = ExtResource("5_4ud33")
+region = Rect2(64, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixup7"]
+atlas = ExtResource("5_4ud33")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbya4"]
+atlas = ExtResource("5_4ud33")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8u36h"]
+atlas = ExtResource("5_4ud33")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rn8oq"]
+atlas = ExtResource("5_4ud33")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_el7xx"]
+atlas = ExtResource("5_4ud33")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynaav"]
+atlas = ExtResource("5_4ud33")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wa858"]
+atlas = ExtResource("5_4ud33")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnvmp"]
+atlas = ExtResource("5_4ud33")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_juow7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6ilx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixup7")
+}],
+"loop": false,
+"name": &"press_down",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbya4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8u36h")
+}],
+"loop": false,
+"name": &"press_left",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rn8oq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_el7xx")
+}],
+"loop": false,
+"name": &"press_right",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynaav")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wa858")
+}],
+"loop": false,
+"name": &"press_up",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tnvmp")
+}],
+"loop": false,
+"name": &"wait",
+"speed": 1.0
+}]
+
+[node name="DancingGame" type="Node2D"]
+script = ExtResource("1_kx0tl")
+_challenge = SubResource("Resource_wqjf4")
+
+[node name="StepsReader" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_l0kwu")
+
+[node name="Demonstrator" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(160, 90)
+sprite_frames = SubResource("SpriteFrames_juow7")
+animation = &"press_down"
+autoplay = "wait"
+
+[node name="StepLabel" type="Label" parent="Demonstrator"]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -24.0
+offset_right = -7.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("5_rqbkh")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1
