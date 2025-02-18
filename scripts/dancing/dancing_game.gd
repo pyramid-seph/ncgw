@@ -6,7 +6,7 @@ extends Node2D
 var _round_idx: int = 0
 
 @onready var _steps_reader: StepsReader = %StepsReader
-@onready var _demonstrator: AnimatedSprite2D = %Demonstrator
+@onready var _demonstrator: AnimatedSprite2D = %Dancer
 @onready var _step_label: Label = %StepLabel
 
 
