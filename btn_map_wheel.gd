@@ -1,3 +1,4 @@
+class_name BtnMapWheel
 extends Node2D
 
 
