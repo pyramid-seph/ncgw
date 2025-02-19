@@ -1,9 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://cxw48rle83veb"]
+[gd_scene load_steps=21 format=3 uid="uid://cxw48rle83veb"]
 
 [ext_resource type="Texture2D" uid="uid://bbjwna7dqivjw" path="res://assets/art/spritesheet_dancer.png" id="1_pgqdd"]
 [ext_resource type="Script" path="res://scripts/dancing/dancer/npc_dancer.gd" id="2_h8eny"]
 [ext_resource type="Script" path="res://btn_map_wheel.gd" id="3_38rpx"]
+[ext_resource type="AudioStream" uid="uid://cpkk8ot6cm2n1" path="res://assets/audio/sfx/sfx_press_down.wav" id="3_fwsko"]
+[ext_resource type="AudioStream" uid="uid://b7wbal3f6yfhw" path="res://assets/audio/sfx/kenney_interface_sounds/error_008.ogg" id="3_rqijd"]
 [ext_resource type="Texture2D" uid="uid://bd6c0ppfryfih" path="res://assets/art/btn_keyboard.png" id="4_8vexq"]
+[ext_resource type="AudioStream" uid="uid://yiwspn6a337n" path="res://assets/audio/sfx/sfx_press_left.wav" id="5_2uwoy"]
+[ext_resource type="AudioStream" uid="uid://38v48jqn8mba" path="res://assets/audio/sfx/sfx_press_right.wav" id="6_0wivl"]
+[ext_resource type="AudioStream" uid="uid://ce4pdrhyjlpht" path="res://assets/audio/sfx/sfx_press_up.wav" id="7_lsyvu"]
 
 [sub_resource type="Animation" id="Animation_lfedq"]
 length = 0.001
@@ -104,6 +109,21 @@ tracks/0/keys = {
 "update": 1,
 "values": [36, 35, 37, 38, 39, 38, 15]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_fwsko")
+}],
+"times": PackedFloat32Array(0.1)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_dhxlx"]
 resource_name = "step_error"
@@ -121,6 +141,21 @@ tracks/0/keys = {
 "update": 1,
 "values": [42, 41]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_rqijd")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_w55wg"]
 resource_name = "step_left"
@@ -138,6 +173,21 @@ tracks/0/keys = {
 "update": 1,
 "values": [21, 22, 23, 22, 21, 15]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_2uwoy")
+}],
+"times": PackedFloat32Array(0.1)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_k84sk"]
 resource_name = "step_right"
@@ -155,6 +205,21 @@ tracks/0/keys = {
 "update": 1,
 "values": [25, 26, 27, 26, 25, 15]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_0wivl")
+}],
+"times": PackedFloat32Array(0.1)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_7sps6"]
 resource_name = "step_up"
@@ -172,6 +237,21 @@ tracks/0/keys = {
 "update": 1,
 "values": [28, 29, 30, 31, 32, 33, 30, 15]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_lsyvu")
+}],
+"times": PackedFloat32Array(0.1)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f0p1f"]
 _data = {
@@ -192,6 +272,8 @@ texture = ExtResource("1_pgqdd")
 hframes = 7
 vframes = 7
 script = ExtResource("2_h8eny")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
