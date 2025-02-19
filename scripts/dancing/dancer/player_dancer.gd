@@ -6,13 +6,30 @@ signal step_attempted(step: Round.Step, success: bool)
 signal steps_completed
 
 
-var btn_map: ButtonMap
+@export_group("Debug", "_debug")
+@export var _debug_show_btn_mapping: bool = true:
+	set(value):
+		_debug_show_btn_mapping = value
+		_on_btn_map_set()
+	get:
+		return OS.is_debug_build() and _debug_show_btn_mapping
+
+var btn_map: ButtonMap:
+	set(value):
+		btn_map = value
+		_on_btn_map_set()
 
 var _steps: Array[Round.Step]
 var _curr_step_idx: int = -1
 var _can_attempt_step: bool
 
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
+@onready var _btn_map_wheel: BtnMapWheel = $BtnMapWheel
+
+
+func _ready() -> void:
+	_on_btn_map_set()
+	_btn_map_wheel.visible = OS.is_debug_build()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -102,6 +119,11 @@ func _get_dance_move_anim(step: Round.Step) -> String:
 			return "step_down"
 		_:
 			return ""
+
+
+func _on_btn_map_set() -> void:
+	if is_node_ready() and btn_map and _debug_show_btn_mapping:
+		_btn_map_wheel.show_button_map(btn_map, true)
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

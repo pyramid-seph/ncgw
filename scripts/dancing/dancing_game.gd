@@ -11,6 +11,10 @@ func _ready() -> void:
 	_player.steps_completed.connect(_on_player_round_completed)
 	_player.step_attempted.connect(_on_player_step_attempted)
 	var btn_map: ButtonMap = ButtonMap.new()
+	btn_map.down = &"btn_left"
+	btn_map.up = &"btn_right"
+	btn_map.left = &"btn_up"
+	btn_map.right = &"btn_down"
 	_player.btn_map = btn_map
 	_leader.steps_completed.connect(print.bind("Finished round."))
 	_leader.btn_map_wheel.show_button_map(btn_map)
