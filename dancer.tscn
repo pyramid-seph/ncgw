@@ -1,23 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cxw48rle83veb"]
+[gd_scene load_steps=15 format=3 uid="uid://cxw48rle83veb"]
 
 [ext_resource type="Texture2D" uid="uid://bbjwna7dqivjw" path="res://assets/art/spritesheet_dancer.png" id="1_e0ohc"]
-
-[sub_resource type="Animation" id="Animation_dhxlx"]
-resource_name = "step_error"
-length = 0.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [42, 41]
-}
+[ext_resource type="Script" path="res://btn_map_wheel.gd" id="2_ha70r"]
+[ext_resource type="Texture2D" uid="uid://bd6c0ppfryfih" path="res://assets/art/btn_keyboard.png" id="2_o8ul7"]
 
 [sub_resource type="Animation" id="Animation_lfedq"]
 length = 0.001
@@ -32,6 +17,39 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ewhgh"]
+resource_name = "bow"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [15, 16, 17, 18, 19, 18, 17, 16, 15]
+}
+
+[sub_resource type="Animation" id="Animation_yg5rl"]
+resource_name = "cooldown"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [10, 14, 15]
 }
 
 [sub_resource type="Animation" id="Animation_vaxqd"]
@@ -49,22 +67,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 2, 4, 0, 5, 6, 7, 6, 5]
-}
-
-[sub_resource type="Animation" id="Animation_ewhgh"]
-resource_name = "bow"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 1.2, 1.3, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [15, 16, 17, 18, 19, 18, 17, 16, 15]
 }
 
 [sub_resource type="Animation" id="Animation_ponb5"]
@@ -85,9 +87,9 @@ tracks/0/keys = {
 "values": [10, 11, 12, 13, 14]
 }
 
-[sub_resource type="Animation" id="Animation_yg5rl"]
-resource_name = "cooldown"
-length = 0.8
+[sub_resource type="Animation" id="Animation_ihl27"]
+resource_name = "step_down"
+length = 0.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -96,10 +98,27 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.2, 0.25, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [10, 14, 15]
+"values": [36, 35, 37, 38, 39, 38, 15]
+}
+
+[sub_resource type="Animation" id="Animation_dhxlx"]
+resource_name = "step_error"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [42, 41]
 }
 
 [sub_resource type="Animation" id="Animation_w55wg"]
@@ -153,23 +172,6 @@ tracks/0/keys = {
 "values": [28, 29, 30, 31, 32, 33, 30, 15]
 }
 
-[sub_resource type="Animation" id="Animation_ihl27"]
-resource_name = "step_down"
-length = 0.5
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.15, 0.2, 0.25, 0.4, 0.45),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [36, 35, 37, 38, 39, 38, 15]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f0p1f"]
 _data = {
 "RESET": SubResource("Animation_lfedq"),
@@ -184,13 +186,40 @@ _data = {
 "step_up": SubResource("Animation_7sps6")
 }
 
-[node name="Dancer" type="Node2D"]
+[node name="NpcDancer" type="Node2D"]
+position = Vector2(64, 64)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -16)
 texture = ExtResource("1_e0ohc")
 hframes = 7
 vframes = 7
+
+[node name="BtnSprites" type="Node2D" parent="Sprite2D"]
+script = ExtResource("2_ha70r")
+
+[node name="BtnTopSprite2D" type="Sprite2D" parent="Sprite2D/BtnSprites"]
+position = Vector2(0, -32)
+texture = ExtResource("2_o8ul7")
+hframes = 5
+frame = 4
+
+[node name="BtnBottomSprite2D" type="Sprite2D" parent="Sprite2D/BtnSprites"]
+position = Vector2(0, 32)
+texture = ExtResource("2_o8ul7")
+hframes = 5
+frame = 4
+
+[node name="BtnLeftSprite2D" type="Sprite2D" parent="Sprite2D/BtnSprites"]
+position = Vector2(-32, 0)
+texture = ExtResource("2_o8ul7")
+hframes = 5
+frame = 4
+
+[node name="BtnRightSprite2D" type="Sprite2D" parent="Sprite2D/BtnSprites"]
+position = Vector2(32, 0)
+texture = ExtResource("2_o8ul7")
+hframes = 5
+frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
