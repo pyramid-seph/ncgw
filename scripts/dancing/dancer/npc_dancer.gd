@@ -28,7 +28,7 @@ func _advance_to_next_step() -> void:
 	if not _steps.is_empty() and _step_idx < _steps.size():
 		var new_step: Round.Step = _steps[_step_idx]
 		step_changed.emit(new_step)
-		var next_anim: String = get_dance_move_anim(new_step)
+		var next_anim: String = _get_dance_move_anim(new_step)
 		if next_anim:
 			_animation_player.play(next_anim)
 		else:
@@ -39,7 +39,7 @@ func _advance_to_next_step() -> void:
 	_stop_performance()
 
 
-func get_dance_move_anim(step: Round.Step) -> String:
+func _get_dance_move_anim(step: Round.Step) -> String:
 	match step:
 		Round.Step.PRESS_LEFT_BTN:
 			return "step_left"

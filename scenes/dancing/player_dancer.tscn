@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://c7aiuxci678pf"]
 
-[ext_resource type="Script" path="res://scripts/dancing/player_dancer.gd" id="1_5g23a"]
+[ext_resource type="Script" path="res://scripts/dancing/dancer/player_dancer.gd" id="1_5g23a"]
 [ext_resource type="Texture2D" uid="uid://bbjwna7dqivjw" path="res://assets/art/spritesheet_dancer.png" id="1_8p8hc"]
 [ext_resource type="AudioStream" uid="uid://cpkk8ot6cm2n1" path="res://assets/audio/sfx/sfx_press_down.wav" id="2_gtfkh"]
 [ext_resource type="AudioStream" uid="uid://b7wbal3f6yfhw" path="res://assets/audio/sfx/kenney_interface_sounds/error_008.ogg" id="3_sa0nx"]
@@ -125,8 +125,7 @@ tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_dhxlx"]
 resource_name = "step_error"
-length = 0.2
-loop_mode = 1
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -134,10 +133,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [42, 41]
+"values": [42, 41, 42, 41, 42, 15]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -151,7 +150,7 @@ tracks/1/keys = {
 "start_offset": 0.0,
 "stream": ExtResource("3_sa0nx")
 }],
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0.1)
 }
 tracks/1/use_blend = true
 
@@ -279,3 +278,5 @@ libraries = {
 "": SubResource("AnimationLibrary_f0p1f")
 }
 autoplay = "idle"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
