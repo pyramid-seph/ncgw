@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/dancing/round.gd" id="2_n085y"]
 [ext_resource type="Script" path="res://scenes/dancing/challenge.gd" id="3_g562o"]
 [ext_resource type="Script" path="res://scenes/dancing/steps_reader.gd" id="4_l0kwu"]
-[ext_resource type="Texture2D" uid="uid://de4cs8uyjtcvc" path="res://assets/art/dancer.png" id="5_4ud33"]
+[ext_resource type="Texture2D" uid="uid://de4cs8uyjtcvc" path="res://assets/art/dancer_temp.png" id="5_4ud33"]
 [ext_resource type="Script" path="res://scenes/dancing/performance_evaluator.gd" id="5_rq0vw"]
 [ext_resource type="FontFile" uid="uid://m3wbmrled4kn" path="res://assets/fonts/kenney/kenney_mini.ttf" id="5_rqbkh"]
 [ext_resource type="Texture2D" uid="uid://bd6c0ppfryfih" path="res://assets/art/btn_keyboard.png" id="6_bpk6y"]

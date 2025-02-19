@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://de4cs8uyjtcvc"
-path="res://.godot/imported/dancer.png-260f4cfd67d68b497b9e9c44e437571d.ctex"
+path="res://.godot/imported/dancer_temp.png-8ed23e2ddea5c499146f09fe1d29f4f0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/dancer.png"
-dest_files=["res://.godot/imported/dancer.png-260f4cfd67d68b497b9e9c44e437571d.ctex"]
+source_file="res://assets/art/dancer_temp.png"
+dest_files=["res://.godot/imported/dancer_temp.png-8ed23e2ddea5c499146f09fe1d29f4f0.ctex"]
 
 [params]
 
