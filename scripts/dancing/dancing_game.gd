@@ -22,6 +22,10 @@ func _ready() -> void:
 	
 	for i in 100:
 		await get_tree().create_timer(2.0).timeout
+		_player.bow()
+		_leader.bow()
+		await _leader.bow()
+		await get_tree().create_timer(2.0).timeout
 		_leader.perform_steps(_challenge.rounds[0].steps)
 		await _leader.steps_completed
 		print("PLAYER TURN!")

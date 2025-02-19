@@ -3,6 +3,7 @@ extends Sprite2D
 
 signal step_changed(step: Round.Step)
 signal steps_completed
+signal bowed
 
 
 var _steps: Array[Round.Step]
@@ -16,6 +17,15 @@ func perform_steps(steps: Array[Round.Step]) -> void:
 	_steps = steps
 	_stop_performance()
 	_advance_to_next_step()
+
+
+func is_dancing() -> bool:
+	return _step_idx > -1
+
+
+func bow() -> void:
+	if not is_dancing():
+		_animation_player.play(&"bow")
 
 
 func _stop_performance() -> void:

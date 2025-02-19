@@ -20,7 +20,7 @@ var btn_map: ButtonMap:
 		_on_btn_map_set()
 
 var _steps: Array[Round.Step]
-var _curr_step_idx: int = -1
+var _step_idx: int = -1
 var _can_attempt_step: bool
 
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
@@ -51,7 +51,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	_can_attempt_step = false
 	
-	var curr_step: Round.Step = _steps[_curr_step_idx]
+	var curr_step: Round.Step = _steps[_step_idx]
 	var expected_input: StringName = _get_expected_input(curr_step)
 	if not expected_input:
 		Log.w("Unknown expected input. Canceling dance.")
@@ -81,12 +81,21 @@ func attempt_steps(new_steps: Array[Round.Step]) -> void:
 func cancel() -> void:
 	_animation_player.play(&"idle")
 	_can_attempt_step = false
-	_curr_step_idx = -1
+	_step_idx = -1
+
+
+func is_dancing() -> bool:
+	return _step_idx > -1
+
+
+func bow() -> void:
+	if not is_dancing():
+		_animation_player.play(&"bow")
 
 
 func _attempt_next_step() -> void:
-	_curr_step_idx += 1
-	if not _steps.is_empty() and _curr_step_idx < _steps.size():
+	_step_idx += 1
+	if not _steps.is_empty() and _step_idx < _steps.size():
 		_can_attempt_step = true
 	else:
 		cancel()
