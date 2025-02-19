@@ -1,25 +1,26 @@
-[gd_scene load_steps=9 format=3 uid="uid://xfqq48b1q036"]
+[gd_scene load_steps=10 format=3 uid="uid://xfqq48b1q036"]
 
 [ext_resource type="Script" path="res://scripts/dancing/dancing_game.gd" id="1_kx0tl"]
-[ext_resource type="Script" path="res://scenes/dancing/round.gd" id="2_n085y"]
-[ext_resource type="Script" path="res://scenes/dancing/challenge.gd" id="3_g562o"]
-[ext_resource type="PackedScene" uid="uid://cxw48rle83veb" path="res://npc_dancer.tscn" id="6_oto48"]
+[ext_resource type="Script" path="res://scripts/dancing/round.gd" id="2_0agvb"]
+[ext_resource type="Script" path="res://scripts/dancing/challenge.gd" id="3_g562o"]
+[ext_resource type="PackedScene" uid="uid://c7aiuxci678pf" path="res://scenes/dancing/player_dancer.tscn" id="5_3wonc"]
+[ext_resource type="PackedScene" uid="uid://cxw48rle83veb" path="res://scenes/dancing/npc_dancer.tscn" id="6_oto48"]
 
 [sub_resource type="Resource" id="Resource_wym73"]
-script = ExtResource("2_n085y")
+script = ExtResource("2_0agvb")
 steps = Array[int]([2])
 
 [sub_resource type="Resource" id="Resource_4eo6t"]
-script = ExtResource("2_n085y")
+script = ExtResource("2_0agvb")
 steps = Array[int]([2, 2])
 
 [sub_resource type="Resource" id="Resource_hwnqi"]
-script = ExtResource("2_n085y")
+script = ExtResource("2_0agvb")
 steps = Array[int]([2, 1, 3, 4])
 
 [sub_resource type="Resource" id="Resource_wqjf4"]
 script = ExtResource("3_g562o")
-rounds = Array[ExtResource("2_n085y")]([SubResource("Resource_wym73"), SubResource("Resource_4eo6t"), SubResource("Resource_hwnqi")])
+rounds = Array[ExtResource("2_0agvb")]([SubResource("Resource_wym73"), SubResource("Resource_4eo6t"), SubResource("Resource_hwnqi")])
 
 [node name="DancingGame" type="Node2D"]
 script = ExtResource("1_kx0tl")
@@ -27,4 +28,7 @@ _challenge = SubResource("Resource_wqjf4")
 
 [node name="Leader" parent="." instance=ExtResource("6_oto48")]
 unique_name_in_owner = true
-position = Vector2(160, 90)
+position = Vector2(100, 90)
+
+[node name="PlayerDancer" parent="." instance=ExtResource("5_3wonc")]
+position = Vector2(220, 90)

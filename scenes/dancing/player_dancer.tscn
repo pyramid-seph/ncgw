@@ -1,14 +1,12 @@
-[gd_scene load_steps=21 format=3 uid="uid://cxw48rle83veb"]
+[gd_scene load_steps=19 format=3 uid="uid://c7aiuxci678pf"]
 
-[ext_resource type="Texture2D" uid="uid://bbjwna7dqivjw" path="res://assets/art/spritesheet_dancer.png" id="1_pgqdd"]
-[ext_resource type="Script" path="res://scripts/dancing/dancer/npc_dancer.gd" id="2_h8eny"]
-[ext_resource type="Script" path="res://btn_map_wheel.gd" id="3_38rpx"]
-[ext_resource type="AudioStream" uid="uid://cpkk8ot6cm2n1" path="res://assets/audio/sfx/sfx_press_down.wav" id="3_fwsko"]
-[ext_resource type="AudioStream" uid="uid://b7wbal3f6yfhw" path="res://assets/audio/sfx/kenney_interface_sounds/error_008.ogg" id="3_rqijd"]
-[ext_resource type="Texture2D" uid="uid://bd6c0ppfryfih" path="res://assets/art/btn_keyboard.png" id="4_8vexq"]
-[ext_resource type="AudioStream" uid="uid://yiwspn6a337n" path="res://assets/audio/sfx/sfx_press_left.wav" id="5_2uwoy"]
-[ext_resource type="AudioStream" uid="uid://38v48jqn8mba" path="res://assets/audio/sfx/sfx_press_right.wav" id="6_0wivl"]
-[ext_resource type="AudioStream" uid="uid://ce4pdrhyjlpht" path="res://assets/audio/sfx/sfx_press_up.wav" id="7_lsyvu"]
+[ext_resource type="Script" path="res://scripts/dancing/player_dancer.gd" id="1_5g23a"]
+[ext_resource type="Texture2D" uid="uid://bbjwna7dqivjw" path="res://assets/art/spritesheet_dancer.png" id="1_8p8hc"]
+[ext_resource type="AudioStream" uid="uid://cpkk8ot6cm2n1" path="res://assets/audio/sfx/sfx_press_down.wav" id="2_gtfkh"]
+[ext_resource type="AudioStream" uid="uid://b7wbal3f6yfhw" path="res://assets/audio/sfx/kenney_interface_sounds/error_008.ogg" id="3_sa0nx"]
+[ext_resource type="AudioStream" uid="uid://yiwspn6a337n" path="res://assets/audio/sfx/sfx_press_left.wav" id="4_g56r2"]
+[ext_resource type="AudioStream" uid="uid://38v48jqn8mba" path="res://assets/audio/sfx/sfx_press_right.wav" id="5_2gu5p"]
+[ext_resource type="AudioStream" uid="uid://ce4pdrhyjlpht" path="res://assets/audio/sfx/sfx_press_up.wav" id="6_blfdd"]
 
 [sub_resource type="Animation" id="Animation_lfedq"]
 length = 0.001
@@ -119,7 +117,7 @@ tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("3_fwsko")
+"stream": ExtResource("2_gtfkh")
 }],
 "times": PackedFloat32Array(0.1)
 }
@@ -151,7 +149,7 @@ tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("3_rqijd")
+"stream": ExtResource("3_sa0nx")
 }],
 "times": PackedFloat32Array(0)
 }
@@ -183,7 +181,7 @@ tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("5_2uwoy")
+"stream": ExtResource("4_g56r2")
 }],
 "times": PackedFloat32Array(0.1)
 }
@@ -215,7 +213,7 @@ tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("6_0wivl")
+"stream": ExtResource("5_2gu5p")
 }],
 "times": PackedFloat32Array(0.1)
 }
@@ -247,7 +245,7 @@ tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("7_lsyvu")
+"stream": ExtResource("6_blfdd")
 }],
 "times": PackedFloat32Array(0.1)
 }
@@ -267,11 +265,12 @@ _data = {
 "step_up": SubResource("Animation_7sps6")
 }
 
-[node name="NpcDancer" type="Sprite2D"]
-texture = ExtResource("1_pgqdd")
+[node name="PlayerDancer" type="Sprite2D"]
+self_modulate = Color(0, 0.494118, 0.85098, 1)
+texture = ExtResource("1_8p8hc")
 hframes = 7
 vframes = 7
-script = ExtResource("2_h8eny")
+script = ExtResource("1_5g23a")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
@@ -280,32 +279,3 @@ libraries = {
 "": SubResource("AnimationLibrary_f0p1f")
 }
 autoplay = "idle"
-
-[node name="BtnMapWheel" type="Node2D" parent="."]
-script = ExtResource("3_38rpx")
-
-[node name="BtnTopSprite2D" type="Sprite2D" parent="BtnMapWheel"]
-position = Vector2(0, -32)
-texture = ExtResource("4_8vexq")
-hframes = 5
-frame = 4
-
-[node name="BtnBottomSprite2D" type="Sprite2D" parent="BtnMapWheel"]
-position = Vector2(0, 32)
-texture = ExtResource("4_8vexq")
-hframes = 5
-frame = 4
-
-[node name="BtnLeftSprite2D" type="Sprite2D" parent="BtnMapWheel"]
-position = Vector2(-32, 0)
-texture = ExtResource("4_8vexq")
-hframes = 5
-frame = 4
-
-[node name="BtnRightSprite2D" type="Sprite2D" parent="BtnMapWheel"]
-position = Vector2(32, 0)
-texture = ExtResource("4_8vexq")
-hframes = 5
-frame = 4
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
