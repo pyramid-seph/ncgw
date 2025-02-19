@@ -4,6 +4,8 @@ extends Node2D
 
 signal new_btn_config_shown
 
+const SFX_ROULETTE = preload("res://assets/audio/sfx/kenney_interface_sounds/drop_003.ogg")
+
 const BTN_FRAME_LEFT: int = 0
 const BTN_FRAME_RIGHT: int = 1
 const BTN_FRAME_UP: int = 2
@@ -49,6 +51,9 @@ func show_button_map(new_button_map: ButtonMap, skip_animation: bool = false) ->
 	_tween_roulette = create_tween()
 	for btn_sprite: Sprite2D in get_children():
 		_tween_roulette.set_loops(10)
+		# TODO Use regular AudioPlayback instead of SoundManager.
+		_tween_roulette.parallel().tween_callback(
+				SoundManager.play_sound.bind(SFX_ROULETTE))
 		_tween_roulette.parallel().tween_property(btn_sprite, "frame", \
 				btn_sprite.hframes - 2, 0.2).from(0)
 	_tween_roulette.finished.connect(

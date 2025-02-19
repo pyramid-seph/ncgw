@@ -11,4 +11,4 @@ func _ready() -> void:
 	_leader.btn_map_wheel.show_button_map(ButtonMap.new())
 	await _leader.btn_map_wheel.new_btn_config_shown
 	await get_tree().create_timer(2.0).timeout
-	_leader.perform_steps(_challenge.rounds[1].steps)
+	_leader.perform_steps(_challenge.rounds[2].steps)
