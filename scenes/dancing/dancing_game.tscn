@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://xfqq48b1q036"]
+[gd_scene load_steps=14 format=3 uid="uid://xfqq48b1q036"]
 
 [ext_resource type="Script" path="res://scripts/dancing/dancing_game.gd" id="1_kx0tl"]
 [ext_resource type="Texture2D" uid="uid://co6r30obi8kbn" path="res://assets/art/theather_dummy.png" id="2_5wlxy"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cbtx7elm7i4m" path="res://assets/art/scenario_curtains.png" id="7_40t4u"]
 [ext_resource type="PackedScene" uid="uid://c2ksbbbmsut7t" path="res://scenes/dancing/person.tscn" id="9_5xqms"]
 [ext_resource type="Texture2D" uid="uid://wh1l645h5omq" path="res://assets/art/scenario_walls.png" id="9_s5j1q"]
+[ext_resource type="Texture2D" uid="uid://bsaukh7qnmm6j" path="res://assets/art/foot.png" id="10_rhb4r"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5gww3"]
 
@@ -61,6 +62,12 @@ metadata/_edit_lock_ = true
 [node name="StageLightsController" parent="World/Theater" instance=ExtResource("5_b30ux")]
 unique_name_in_owner = true
 metadata/_edit_lock_ = true
+
+[node name="Foot" type="Sprite2D" parent="World/Theater"]
+unique_name_in_owner = true
+position = Vector2(60, -150)
+texture = ExtResource("10_rhb4r")
+centered = false
 
 [node name="Courtains" parent="World/Theater" instance=ExtResource("6_goyhv")]
 unique_name_in_owner = true
@@ -167,11 +174,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxEmpty_5gww3")
 
-[node name="FinishedLabel" type="RichTextLabel" parent="Ui/Hud"]
+[node name="FinishedLabel" type="PanelContainer" parent="Ui/Hud"]
 unique_name_in_owner = true
 visible = false
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Label" type="RichTextLabel" parent="Ui/Hud/FinishedLabel"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/outline_size = 4
@@ -209,6 +221,94 @@ theme_override_font_sizes/font_size = 8
 text = "Round 1 of 5"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="FailuresLabel" type="Label" parent="Ui/Hud/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "Fails: 30"
+
+[node name="Results" type="CenterContainer" parent="Ui/Hud"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Ui/Hud/Results"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui/Hud/Results/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui/Hud/Results/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Ui/Hud/Results/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_0u7r0")
+text = "Results"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NailedScoreLabel" type="Label" parent="Ui/Hud/Results/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "8 correct steps = 800"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RehearsalsScoreLabel" type="Label" parent="Ui/Hud/Results/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "8 rehearsals = -200"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TotalScoreLabel" type="Label" parent="Ui/Hud/Results/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "TOTAL: 600"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Ui/Hud/Results/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="YouAreLabel" type="Label" parent="Ui/Hud/Results/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "You are NOT perfect"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseResultsBtn" type="Button" parent="Ui/Hud/Results/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "OK"
 
 [node name="Darkness" type="ColorRect" parent="Ui"]
 unique_name_in_owner = true
@@ -282,6 +382,9 @@ theme_override_fonts/font = ExtResource("5_0u7r0")
 theme_override_font_sizes/font_size = 16
 text = "Let's do it!"
 
+[node name="PanelContainer" type="PanelContainer" parent="Ui/Screens/FinishedRehearsalScreen"]
+layout_mode = 2
+
 [node name="CreditsScreen" type="VBoxContainer" parent="Ui/Screens"]
 unique_name_in_owner = true
 visible = false
@@ -308,6 +411,7 @@ size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("5_0u7r0")
 text = "To title screen"
 
+[connection signal="step_attempted" from="World/Theater/Player" to="." method="_on_player_step_attempted"]
 [connection signal="pressed" from="Ui/Screens/TitleScreen/StartRehearsalBtn" to="." method="_on_start_rehearsal_btn_pressed"]
 [connection signal="pressed" from="Ui/Screens/TitleScreen/ShowCreditsBtn" to="." method="_on_show_credits_btn_pressed"]
 [connection signal="pressed" from="Ui/Screens/FinishedRehearsalScreen/HBoxContainer/PracticeAgainBtn" to="." method="_on_practice_again_btn_pressed"]

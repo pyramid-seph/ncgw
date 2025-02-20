@@ -12,20 +12,20 @@ func generate() -> Array[Round]:
 	var challenge: Array[Round] = []
 	# Round 1
 	challenge.append(Round.new(_gen_steps(1)))
-	# Round 2
-	challenge.append(Round.new(_gen_steps(4)))
-	# Round 3
-	challenge.append(Round.new(_gen_steps(2)))
-	# Round 4
-	challenge.append(Round.new(_gen_steps(5)))
-	# Round 5
-	challenge.append(Round.new(_gen_steps(3)))
-	# Round 6
-	challenge.append(Round.new(_gen_steps(4), _gen_traps(ALLOWED_TRAPS)))
-	# Round 7
-	challenge.append(Round.new(_gen_steps(3), _gen_traps(ALLOWED_TRAPS)))
-	# Round 8
-	challenge.append(Round.new(_gen_steps(8), Round.Traps.REVERSE_STEPS))
+	## Round 2
+	#challenge.append(Round.new(_gen_steps(4)))
+	## Round 3
+	#challenge.append(Round.new(_gen_steps(2)))
+	## Round 4
+	#challenge.append(Round.new(_gen_steps(5)))
+	## Round 5
+	#challenge.append(Round.new(_gen_steps(3)))
+	## Round 6
+	#challenge.append(Round.new(_gen_steps(4), _gen_traps(ALLOWED_TRAPS)))
+	## Round 7
+	#challenge.append(Round.new(_gen_steps(3), _gen_traps(ALLOWED_TRAPS)))
+	## Round 8
+	#challenge.append(Round.new(_gen_steps(8), Round.Traps.REVERSE_STEPS))
 	return challenge
 
 
