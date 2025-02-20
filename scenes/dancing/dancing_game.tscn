@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://xfqq48b1q036"]
+[gd_scene load_steps=7 format=3 uid="uid://xfqq48b1q036"]
 
 [ext_resource type="Script" path="res://scripts/dancing/dancing_game.gd" id="1_kx0tl"]
 [ext_resource type="FontFile" uid="uid://cwc2c33qocoqn" path="res://assets/fonts/peaberry_font_v2_0/peaberry_base.woff2" id="3_j0ask"]
 [ext_resource type="FontFile" uid="uid://m3wbmrled4kn" path="res://assets/fonts/kenney/kenney_mini.ttf" id="5_0u7r0"]
 [ext_resource type="PackedScene" uid="uid://c7aiuxci678pf" path="res://scenes/dancing/player_dancer.tscn" id="5_3wonc"]
 [ext_resource type="PackedScene" uid="uid://cxw48rle83veb" path="res://scenes/dancing/npc_dancer.tscn" id="6_oto48"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5gww3"]
 
 [node name="DancingGame" type="Node2D"]
 script = ExtResource("1_kx0tl")
@@ -16,11 +18,13 @@ position = Vector2(100, 90)
 [node name="Player" parent="." instance=ExtResource("5_3wonc")]
 unique_name_in_owner = true
 position = Vector2(220, 90)
+_debug_show_btn_mapping = false
 
 [node name="LightCanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Darkness" type="ColorRect" parent="LightCanvasLayer"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -29,6 +33,51 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Ui" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="Ui"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5gww3")
+
+[node name="FinishedLabel" type="RichTextLabel" parent="Ui/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("5_0u7r0")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center][wave amp=50.0 freq=5.0 connected=1]FINISHED![/wave][/center]"
+fit_content = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RehearsalsCountLabel" type="Label" parent="Ui/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "Rehearsal 999"
+vertical_alignment = 1
+
+[node name="RoundCountLabel" type="Label" parent="Ui/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "Round 1 of 5"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="Ui"]
 anchors_preset = 15
@@ -39,6 +88,7 @@ grow_vertical = 2
 
 [node name="TitleScreen" type="VBoxContainer" parent="Ui/CenterContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 8
 

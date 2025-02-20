@@ -4,6 +4,7 @@ extends Sprite2D
 
 signal step_attempted(step: Round.Step, success: bool)
 signal steps_completed
+signal bowed
 
 
 @export_group("Debug", "_debug")
@@ -131,8 +132,14 @@ func _get_dance_move_anim(step: Round.Step) -> String:
 
 
 func _on_btn_map_set() -> void:
-	if is_node_ready() and btn_map and _debug_show_btn_mapping:
+	if not is_node_ready():
+		return
+	
+	if btn_map and _debug_show_btn_mapping:
+		_btn_map_wheel.show()
 		_btn_map_wheel.show_button_map(btn_map, true)
+	else:
+		_btn_map_wheel.hide()
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -142,3 +149,5 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			anim_name == &"step_down" or \
 			anim_name == &"step_error":
 		_attempt_next_step ()
+	elif anim_name == &"bow":
+		bowed.emit()

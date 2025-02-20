@@ -69,3 +69,5 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			anim_name == &"step_up" or \
 			anim_name == &"step_down":
 		_advance_to_next_step()
+	elif anim_name == &"bow":
+		bowed.emit()
