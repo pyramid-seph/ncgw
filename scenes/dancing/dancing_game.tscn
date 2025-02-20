@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://xfqq48b1q036"]
+[gd_scene load_steps=6 format=3 uid="uid://xfqq48b1q036"]
 
 [ext_resource type="Script" path="res://scripts/dancing/dancing_game.gd" id="1_kx0tl"]
-[ext_resource type="FontFile" uid="uid://cwc2c33qocoqn" path="res://assets/fonts/peaberry_font_v2_0/peaberry_base.woff2" id="3_j0ask"]
 [ext_resource type="FontFile" uid="uid://m3wbmrled4kn" path="res://assets/fonts/kenney/kenney_mini.ttf" id="5_0u7r0"]
 [ext_resource type="PackedScene" uid="uid://c7aiuxci678pf" path="res://scenes/dancing/player_dancer.tscn" id="5_3wonc"]
 [ext_resource type="PackedScene" uid="uid://cxw48rle83veb" path="res://scenes/dancing/npc_dancer.tscn" id="6_oto48"]
@@ -94,7 +93,7 @@ theme_override_constants/separation = 8
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Ui/CenterContainer/TitleScreen"]
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("3_j0ask")
+theme_override_fonts/normal_font = ExtResource("5_0u7r0")
 bbcode_enabled = true
 text = "The Contest"
 fit_content = true
@@ -102,7 +101,7 @@ autowrap_mode = 0
 
 [node name="StartRehearsalBtn" type="Button" parent="Ui/CenterContainer/TitleScreen"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_j0ask")
+theme_override_fonts/font = ExtResource("5_0u7r0")
 text = "Rehearse"
 
 [node name="ShowCreditsBtn" type="Button" parent="Ui/CenterContainer/TitleScreen"]
@@ -118,7 +117,7 @@ layout_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Ui/CenterContainer/FinishedRehearsalScreen"]
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("3_j0ask")
+theme_override_fonts/normal_font = ExtResource("5_0u7r0")
 bbcode_enabled = true
 text = "Ready for the contest?"
 fit_content = true
@@ -130,14 +129,14 @@ layout_mode = 2
 [node name="PracticeAgainBtn" type="Button" parent="Ui/CenterContainer/FinishedRehearsalScreen/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3_j0ask")
+theme_override_fonts/font = ExtResource("5_0u7r0")
 theme_override_font_sizes/font_size = 16
 text = "Rehearse"
 
 [node name="RealDealButton" type="Button" parent="Ui/CenterContainer/FinishedRehearsalScreen/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3_j0ask")
+theme_override_fonts/font = ExtResource("5_0u7r0")
 theme_override_font_sizes/font_size = 16
 text = "Let's do it!"
 
@@ -164,7 +163,7 @@ autowrap_mode = 0
 [node name="ToTitleScreenBtn" type="Button" parent="Ui/CenterContainer/CreditsScreen"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("3_j0ask")
+theme_override_fonts/font = ExtResource("5_0u7r0")
 text = "To title screen"
 
 [connection signal="pressed" from="Ui/CenterContainer/TitleScreen/StartRehearsalBtn" to="." method="_on_start_rehearsal_btn_pressed"]
