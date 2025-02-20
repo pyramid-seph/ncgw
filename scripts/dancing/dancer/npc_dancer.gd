@@ -13,6 +13,12 @@ var _step_idx: int = -1
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 
+func _ready() -> void:
+	var animation_length: float = _animation_player.current_animation_length
+	_animation_player.play(_animation_player.current_animation)
+	_animation_player.seek(randf_range(0.0, animation_length))
+
+
 func perform_steps(steps: Array[Round.Step]) -> void:
 	_steps = steps
 	_stop_performance()
