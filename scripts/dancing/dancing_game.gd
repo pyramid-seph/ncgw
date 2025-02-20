@@ -41,6 +41,7 @@ func _on_state_changed() -> void:
 	_finished_label.hide()
 	_round_count_label.hide()
 	_rehearsals_count_label.hide()
+	_leader.btn_map_wheel.hide()
 	
 	match _state:
 		State.TITLE_SCREEN:
@@ -89,6 +90,8 @@ func _rehearse() -> void:
 	_rehearsals_count_label.show()
 	_rehearsals_count_label.text = "Rehearsal %s" % _rehearsals_count
 	
+	_leader.btn_map_wheel.show()
+	
 	# Rehearsals always use default button map
 	var btn_map: ButtonMap = ButtonMap.new()
 	_leader.btn_map_wheel.show_button_map(btn_map, true)
@@ -116,6 +119,7 @@ func _rehearse() -> void:
 		_player.attempt_steps(steps)
 		await _player.steps_completed
 		# TODO Turn off player light
+	_leader.btn_map_wheel.hide()
 	await create_tween().tween_interval(2.0).finished
 	_round_count_label.hide()
 	var label_text_length: int = _finished_label.get_parsed_text().length()

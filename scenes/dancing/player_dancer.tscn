@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c7aiuxci678pf"]
+[gd_scene load_steps=22 format=3 uid="uid://c7aiuxci678pf"]
 
 [ext_resource type="Script" path="res://scripts/dancing/dancer/player_dancer.gd" id="1_5g23a"]
 [ext_resource type="Texture2D" uid="uid://bbjwna7dqivjw" path="res://assets/art/spritesheet_dancer.png" id="1_8p8hc"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://ce4pdrhyjlpht" path="res://assets/audio/sfx/sfx_press_up.wav" id="6_blfdd"]
 [ext_resource type="Script" path="res://scripts/dancing/btn_map_wheel.gd" id="8_wt4al"]
 [ext_resource type="Texture2D" uid="uid://bd6c0ppfryfih" path="res://assets/art/btn_keyboard.png" id="9_p8v3c"]
+[ext_resource type="Texture2D" uid="uid://dln3ogm8yv4kg" path="res://assets/art/shadow.png" id="10_kjnim"]
 
 [sub_resource type="Animation" id="Animation_lfedq"]
 length = 0.001
@@ -285,27 +286,33 @@ autoplay = "idle"
 script = ExtResource("8_wt4al")
 
 [node name="BtnTopSprite2D" type="Sprite2D" parent="BtnMapWheel"]
-position = Vector2(0, -32)
+position = Vector2(0, -24)
 texture = ExtResource("9_p8v3c")
 hframes = 5
 frame = 4
 
 [node name="BtnBottomSprite2D" type="Sprite2D" parent="BtnMapWheel"]
-position = Vector2(0, 32)
+position = Vector2(0, 24)
 texture = ExtResource("9_p8v3c")
 hframes = 5
 frame = 4
 
 [node name="BtnLeftSprite2D" type="Sprite2D" parent="BtnMapWheel"]
-position = Vector2(-32, 0)
+position = Vector2(-24, 0)
 texture = ExtResource("9_p8v3c")
 hframes = 5
 frame = 4
 
 [node name="BtnRightSprite2D" type="Sprite2D" parent="BtnMapWheel"]
-position = Vector2(32, 0)
+position = Vector2(24, 0)
 texture = ExtResource("9_p8v3c")
 hframes = 5
 frame = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.133333, 0.133333, 0.133333, 1)
+show_behind_parent = true
+position = Vector2(0, 13)
+texture = ExtResource("10_kjnim")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
