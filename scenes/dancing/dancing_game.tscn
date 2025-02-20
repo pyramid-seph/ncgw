@@ -1,18 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://xfqq48b1q036"]
+[gd_scene load_steps=9 format=3 uid="uid://xfqq48b1q036"]
 
 [ext_resource type="Script" path="res://scripts/dancing/dancing_game.gd" id="1_kx0tl"]
 [ext_resource type="Texture2D" uid="uid://co6r30obi8kbn" path="res://assets/art/theather_dummy.png" id="2_5wlxy"]
 [ext_resource type="FontFile" uid="uid://m3wbmrled4kn" path="res://assets/fonts/kenney/kenney_mini.ttf" id="5_0u7r0"]
 [ext_resource type="PackedScene" uid="uid://c7aiuxci678pf" path="res://scenes/dancing/player_dancer.tscn" id="5_3wonc"]
 [ext_resource type="PackedScene" uid="uid://b8u6nsahsfi2g" path="res://scenes/dancing/stage_lights_controller.tscn" id="5_b30ux"]
+[ext_resource type="PackedScene" uid="uid://c5rj4kagg4yy4" path="res://scenes/dancing/courtains.tscn" id="6_goyhv"]
 [ext_resource type="PackedScene" uid="uid://cxw48rle83veb" path="res://scenes/dancing/npc_dancer.tscn" id="6_oto48"]
-
-[sub_resource type="Gradient" id="Gradient_wq8qp"]
-colors = PackedColorArray(0.184314, 0, 0, 1, 0.980392, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_dqorb"]
-gradient = SubResource("Gradient_wq8qp")
-width = 288
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5gww3"]
 
@@ -37,12 +31,9 @@ metadata/_edit_lock_ = true
 [node name="StageLightsController" parent="." instance=ExtResource("5_b30ux")]
 unique_name_in_owner = true
 
-[node name="Courtains" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(16, 0)
-scale = Vector2(1, 160)
-texture = SubResource("GradientTexture1D_dqorb")
-centered = false
+[node name="Courtains" parent="." instance=ExtResource("6_goyhv")]
+unique_name_in_owner = true
+position = Vector2(16, -160)
 
 [node name="Ui" type="CanvasLayer" parent="."]
 

@@ -28,6 +28,7 @@ var _state: State:
 @onready var _round_count_label: Label = %RoundCountLabel
 @onready var _rehearsals_count_label: Label = %RehearsalsCountLabel
 @onready var _stage_lights_controller: StageLightsController = %StageLightsController
+@onready var _courtains: Courtains = %Courtains
 
 
 func _ready() -> void:
@@ -88,6 +89,8 @@ func _rehearse() -> void:
 	if _rehearsals_count < 1:
 		_challenge = _generate_challenge()
 	
+	_courtains.close(true)
+	
 	_rehearsals_count += 1
 	_rehearsals_count_label.show()
 	_rehearsals_count_label.text = "Rehearsal %s" % _rehearsals_count
@@ -98,6 +101,9 @@ func _rehearse() -> void:
 	_player.btn_map = btn_map
 	
 	_darkness.hide()
+	await create_tween().tween_interval(2.0).finished
+	_courtains.open() # TODO This should only happen on the real deal
+	await _courtains.opened
 	await create_tween().tween_interval(2.0).finished
 	_player.bow()
 	_leader.bow()
@@ -126,7 +132,9 @@ func _rehearse() -> void:
 		await _player.steps_completed
 	_stage_lights_controller.turn_on_lights()
 	_leader.btn_map_wheel.hide()
-	await create_tween().tween_interval(2.0).finished
+	await create_tween().tween_interval(3.0).finished
+	_courtains.close() # TODO This should only happen on the real deal
+	await _courtains.closed
 	_round_count_label.hide()
 	var label_text_length: int = _finished_label.get_parsed_text().length()
 	_rehearsals_count_label.hide()
