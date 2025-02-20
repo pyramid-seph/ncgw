@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://xfqq48b1q036"]
+[gd_scene load_steps=6 format=3 uid="uid://xfqq48b1q036"]
 
 [ext_resource type="Script" path="res://scripts/dancing/dancing_game.gd" id="1_kx0tl"]
-[ext_resource type="Resource" uid="uid://udscnw1ombt4" path="res://assets/resources/dancing_game.tres" id="2_w0uip"]
+[ext_resource type="FontFile" uid="uid://cwc2c33qocoqn" path="res://assets/fonts/peaberry_font_v2_0/peaberry_base.woff2" id="3_j0ask"]
+[ext_resource type="FontFile" uid="uid://m3wbmrled4kn" path="res://assets/fonts/kenney/kenney_mini.ttf" id="5_0u7r0"]
 [ext_resource type="PackedScene" uid="uid://c7aiuxci678pf" path="res://scenes/dancing/player_dancer.tscn" id="5_3wonc"]
 [ext_resource type="PackedScene" uid="uid://cxw48rle83veb" path="res://scenes/dancing/npc_dancer.tscn" id="6_oto48"]
 
 [node name="DancingGame" type="Node2D"]
 script = ExtResource("1_kx0tl")
-_challenge = ExtResource("2_w0uip")
 
 [node name="Leader" parent="." instance=ExtResource("6_oto48")]
 unique_name_in_owner = true
@@ -16,3 +16,109 @@ position = Vector2(100, 90)
 [node name="Player" parent="." instance=ExtResource("5_3wonc")]
 unique_name_in_owner = true
 position = Vector2(220, 90)
+
+[node name="LightCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Darkness" type="ColorRect" parent="LightCanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Ui" type="CanvasLayer" parent="."]
+
+[node name="CenterContainer" type="CenterContainer" parent="Ui"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleScreen" type="VBoxContainer" parent="Ui/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Ui/CenterContainer/TitleScreen"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_j0ask")
+bbcode_enabled = true
+text = "The Contest"
+fit_content = true
+autowrap_mode = 0
+
+[node name="StartRehearsalBtn" type="Button" parent="Ui/CenterContainer/TitleScreen"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_j0ask")
+text = "Rehearse"
+
+[node name="ShowCreditsBtn" type="Button" parent="Ui/CenterContainer/TitleScreen"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "Credits"
+
+[node name="FinishedRehearsalScreen" type="VBoxContainer" parent="Ui/CenterContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Ui/CenterContainer/FinishedRehearsalScreen"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_j0ask")
+bbcode_enabled = true
+text = "Ready for the contest?"
+fit_content = true
+autowrap_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/CenterContainer/FinishedRehearsalScreen"]
+layout_mode = 2
+
+[node name="PracticeAgainBtn" type="Button" parent="Ui/CenterContainer/FinishedRehearsalScreen/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_j0ask")
+theme_override_font_sizes/font_size = 16
+text = "Rehearse"
+
+[node name="RealDealButton" type="Button" parent="Ui/CenterContainer/FinishedRehearsalScreen/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_j0ask")
+theme_override_font_sizes/font_size = 16
+text = "Let's do it!"
+
+[node name="CreditsScreen" type="VBoxContainer" parent="Ui/CenterContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Ui/CenterContainer/CreditsScreen"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("5_0u7r0")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "Game and art By Pyramid Seph
+
+SFXs by Kenney
+
+Fonts by Kenney and 
+
+Music by ???"
+fit_content = true
+autowrap_mode = 0
+
+[node name="ToTitleScreenBtn" type="Button" parent="Ui/CenterContainer/CreditsScreen"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_j0ask")
+text = "To title screen"
+
+[connection signal="pressed" from="Ui/CenterContainer/TitleScreen/StartRehearsalBtn" to="." method="_on_start_rehearsal_btn_pressed"]
+[connection signal="pressed" from="Ui/CenterContainer/TitleScreen/ShowCreditsBtn" to="." method="_on_show_credits_btn_pressed"]
+[connection signal="pressed" from="Ui/CenterContainer/FinishedRehearsalScreen/HBoxContainer/PracticeAgainBtn" to="." method="_on_practice_again_btn_pressed"]
+[connection signal="pressed" from="Ui/CenterContainer/FinishedRehearsalScreen/HBoxContainer/RealDealButton" to="." method="_on_real_deal_button_pressed"]
+[connection signal="pressed" from="Ui/CenterContainer/CreditsScreen/ToTitleScreenBtn" to="." method="_on_to_title_screen_btn_pressed"]

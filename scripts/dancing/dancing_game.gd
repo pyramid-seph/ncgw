@@ -1,42 +1,81 @@
 extends Node2D
 
+# XXX This game flow is held together by hopes and dreams >_<
 
-@export var _challenge: Challenge
+enum State {
+	TITLE_SCREEN,
+	PLAYING_REHEARSALS,
+	PLAYING_REAL_DEAL,
+	CREDITS,
+}
+
+var _state: State:
+	set(value):
+		var old_val: State = _state
+		_state = value
+		if old_val != _state:
+			_on_state_changed()
 
 @onready var _leader: NpcDancer = %Leader
 @onready var _player: PlayerDancer = %Player
+@onready var _darkness: ColorRect = %Darkness
+@onready var _title_screen: VBoxContainer = %TitleScreen
+@onready var _finished_rehearsal_screen: VBoxContainer = %FinishedRehearsalScreen
+@onready var _credits_screen: VBoxContainer = %CreditsScreen
 
 
 func _ready() -> void:
-	_player.steps_completed.connect(_on_player_round_completed)
-	_player.step_attempted.connect(_on_player_step_attempted)
-	var btn_map: ButtonMap = ButtonMap.new()
-	btn_map.down = &"btn_left"
-	btn_map.up = &"btn_right"
-	btn_map.left = &"btn_up"
-	btn_map.right = &"btn_down"
-	_player.btn_map = btn_map
-	_leader.steps_completed.connect(print.bind("Finished round."))
-	_leader.btn_map_wheel.show_button_map(btn_map)
-	await _leader.btn_map_wheel.new_btn_config_shown
+	_on_state_changed()
+
+
+func _on_state_changed() -> void:
+	_darkness.hide()
+	_title_screen.hide()
+	_credits_screen.hide()
+	_finished_rehearsal_screen.hide()
 	
-	for i in 100:
-		await get_tree().create_timer(2.0).timeout
-		_player.bow()
-		_leader.bow()
-		await _leader.bow()
-		await get_tree().create_timer(2.0).timeout
-		_leader.perform_steps(_challenge.rounds[0].steps)
-		await _leader.steps_completed
-		print("PLAYER TURN!")
-		_player.attempt_steps(_challenge.rounds[0].steps)
-		await _player.steps_completed
+	match _state:
+		State.TITLE_SCREEN:
+			_darkness.show()
+			_title_screen.show()
+		State.PLAYING_REHEARSALS:
+			rehearse()
+		State.PLAYING_REAL_DEAL:
+			participate_in_contest()
+		State.CREDITS:
+			_darkness.show()
+			_credits_screen.show()
 
 
-func _on_player_round_completed() -> void:
-	print("Player round completed!")
+func rehearse() -> void:
+	# TODO rehearse
+	await get_tree().create_timer(3.0, false).timeout
+	_darkness.show()
+	_finished_rehearsal_screen.show()
 
 
-func _on_player_step_attempted(_step: Round.Step, success: bool) -> void:
-	print("CORRECT" if success else "FAIL!!!!!!!!!!!!!!")
+func participate_in_contest() -> void:
+	# TODO real deal
+	await get_tree().create_timer(3.0, false).timeout
+	_state = State.TITLE_SCREEN
 
+
+func _on_start_rehearsal_btn_pressed() -> void:
+	_state = State.PLAYING_REHEARSALS
+
+
+func _on_practice_again_btn_pressed() -> void:
+	_state = State.PLAYING_REHEARSALS
+	_on_state_changed()
+
+
+func _on_real_deal_button_pressed() -> void:
+	_state = State.PLAYING_REAL_DEAL
+
+
+func _on_to_title_screen_btn_pressed() -> void:
+	_state = State.TITLE_SCREEN
+
+
+func _on_show_credits_btn_pressed() -> void:
+	_state = State.CREDITS
