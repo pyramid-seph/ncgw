@@ -30,7 +30,6 @@ var _can_attempt_step: bool
 
 func _ready() -> void:
 	_on_btn_map_set()
-	_btn_map_wheel.visible = OS.is_debug_build()
 
 
 func _unhandled_input(event: InputEvent) -> void:

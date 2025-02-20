@@ -27,6 +27,7 @@ var _state: State:
 @onready var _finished_label: RichTextLabel = %FinishedLabel
 @onready var _round_count_label: Label = %RoundCountLabel
 @onready var _rehearsals_count_label: Label = %RehearsalsCountLabel
+@onready var _stage_lights_controller: StageLightsController = %StageLightsController
 
 
 func _ready() -> void:
@@ -42,6 +43,7 @@ func _on_state_changed() -> void:
 	_round_count_label.hide()
 	_rehearsals_count_label.hide()
 	_leader.btn_map_wheel.hide()
+	_stage_lights_controller.turn_on_lights()
 	
 	match _state:
 		State.TITLE_SCREEN:
@@ -90,35 +92,39 @@ func _rehearse() -> void:
 	_rehearsals_count_label.show()
 	_rehearsals_count_label.text = "Rehearsal %s" % _rehearsals_count
 	
-	_leader.btn_map_wheel.show()
-	
 	# Rehearsals always use default button map
 	var btn_map: ButtonMap = ButtonMap.new()
 	_leader.btn_map_wheel.show_button_map(btn_map, true)
 	_player.btn_map = btn_map
 	
 	_darkness.hide()
+	await create_tween().tween_interval(2.0).finished
+	_player.bow()
+	_leader.bow()
+	await _leader.bowed
 	await create_tween().tween_interval(1.0).finished
-	# _darkness.show()  # TODO
+	_stage_lights_controller.turn_off_lights()
 	_finished_label.visible_characters = 0
 	_round_count_label.show()
+	_round_count_label.text = ""
 	var round_count: int = 0
 	
 	for curr_round: Round in _challenge:
 		round_count += 1
-		_round_count_label.text = "Round %s of %s" % [round_count, _challenge.size()]
-		# TODO Turn off player light
-		# TODO Turn on leader light
-		await create_tween().tween_interval(2.0).finished
+		await create_tween().tween_interval(1.5).finished
+		_stage_lights_controller.shine_light_on_leader()
+		_round_count_label.text = \
+				"Round %s of %s" % [round_count, _challenge.size()]
+		_leader.btn_map_wheel.show()
+		await create_tween().tween_interval(0.5).finished
 		var steps: Array[Round.Step] = curr_round.steps
 		_leader.perform_steps(steps)
 		await _leader.steps_completed
-		await create_tween().tween_interval(2.0).finished
-		# TODO Turn off leader light
-		# TODO Turn on player light
+		await create_tween().tween_interval(0.5).finished
+		_stage_lights_controller.shine_light_on_player()
 		_player.attempt_steps(steps)
 		await _player.steps_completed
-		# TODO Turn off player light
+	_stage_lights_controller.turn_on_lights()
 	_leader.btn_map_wheel.hide()
 	await create_tween().tween_interval(2.0).finished
 	_round_count_label.hide()
@@ -126,7 +132,7 @@ func _rehearse() -> void:
 	_rehearsals_count_label.hide()
 	_finished_label.show()
 	await create_tween().tween_property(_finished_label, "visible_characters", \
-			label_text_length, 1.0).from(0).finished
+			label_text_length, 0.5).from(0).finished
 	await create_tween().tween_interval(3.0).finished
 	_finished_label.hide()
 	_darkness.show()

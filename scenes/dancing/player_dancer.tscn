@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c7aiuxci678pf"]
+[gd_scene load_steps=23 format=3 uid="uid://c7aiuxci678pf"]
 
 [ext_resource type="Script" path="res://scripts/dancing/dancer/player_dancer.gd" id="1_5g23a"]
 [ext_resource type="Texture2D" uid="uid://bbjwna7dqivjw" path="res://assets/art/spritesheet_dancer.png" id="1_8p8hc"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/dancing/btn_map_wheel.gd" id="8_wt4al"]
 [ext_resource type="Texture2D" uid="uid://bd6c0ppfryfih" path="res://assets/art/btn_keyboard.png" id="9_p8v3c"]
 [ext_resource type="Texture2D" uid="uid://dln3ogm8yv4kg" path="res://assets/art/shadow.png" id="10_kjnim"]
+[ext_resource type="FontFile" uid="uid://m3wbmrled4kn" path="res://assets/fonts/kenney/kenney_mini.ttf" id="11_d2c0d"]
 
 [sub_resource type="Animation" id="Animation_lfedq"]
 length = 0.001
@@ -283,6 +284,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="BtnMapWheel" type="Node2D" parent="."]
+visible = false
 script = ExtResource("8_wt4al")
 
 [node name="BtnTopSprite2D" type="Sprite2D" parent="BtnMapWheel"]
@@ -314,5 +316,23 @@ self_modulate = Color(0.133333, 0.133333, 0.133333, 1)
 show_behind_parent = true
 position = Vector2(0, 13)
 texture = ExtResource("10_kjnim")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -19.5
+offset_top = 18.0
+offset_right = -4.5
+offset_bottom = 28.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("11_d2c0d")
+theme_override_font_sizes/font_size = 8
+text = "YOU"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -284,7 +284,6 @@ libraries = {
 autoplay = "idle"
 
 [node name="BtnMapWheel" type="Node2D" parent="."]
-z_index = 1
 script = ExtResource("3_38rpx")
 
 [node name="BtnTopSprite2D" type="Sprite2D" parent="BtnMapWheel"]

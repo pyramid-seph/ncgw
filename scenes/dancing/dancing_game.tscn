@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://xfqq48b1q036"]
+[gd_scene load_steps=10 format=3 uid="uid://xfqq48b1q036"]
 
 [ext_resource type="Script" path="res://scripts/dancing/dancing_game.gd" id="1_kx0tl"]
 [ext_resource type="Texture2D" uid="uid://co6r30obi8kbn" path="res://assets/art/theather_dummy.png" id="2_5wlxy"]
 [ext_resource type="FontFile" uid="uid://m3wbmrled4kn" path="res://assets/fonts/kenney/kenney_mini.ttf" id="5_0u7r0"]
 [ext_resource type="PackedScene" uid="uid://c7aiuxci678pf" path="res://scenes/dancing/player_dancer.tscn" id="5_3wonc"]
+[ext_resource type="PackedScene" uid="uid://b8u6nsahsfi2g" path="res://scenes/dancing/stage_lights_controller.tscn" id="5_b30ux"]
 [ext_resource type="PackedScene" uid="uid://cxw48rle83veb" path="res://scenes/dancing/npc_dancer.tscn" id="6_oto48"]
 
 [sub_resource type="Gradient" id="Gradient_wq8qp"]
@@ -25,16 +26,16 @@ centered = false
 [node name="Leader" parent="." instance=ExtResource("6_oto48")]
 unique_name_in_owner = true
 position = Vector2(120, 116)
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("5_3wonc")]
 unique_name_in_owner = true
 position = Vector2(200, 116)
 _debug_show_btn_mapping = false
+metadata/_edit_lock_ = true
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2(120, 0)
-color = Color(1, 1, 1, 0.352941)
-polygon = PackedVector2Array(0, 0, 24, 136, -24, 136)
+[node name="StageLightsController" parent="." instance=ExtResource("5_b30ux")]
+unique_name_in_owner = true
 
 [node name="Courtains" type="Sprite2D" parent="."]
 visible = false
@@ -43,21 +44,9 @@ scale = Vector2(1, 160)
 texture = SubResource("GradientTexture1D_dqorb")
 centered = false
 
-[node name="LightCanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Darkness" type="ColorRect" parent="LightCanvasLayer"]
-unique_name_in_owner = true
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
 [node name="Ui" type="CanvasLayer" parent="."]
 
-[node name="PanelContainer" type="PanelContainer" parent="Ui"]
+[node name="Hud" type="PanelContainer" parent="Ui"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -65,8 +54,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_5gww3")
 
-[node name="FinishedLabel" type="RichTextLabel" parent="Ui/PanelContainer"]
+[node name="FinishedLabel" type="RichTextLabel" parent="Ui/Hud"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/outline_size = 4
@@ -76,14 +66,14 @@ bbcode_enabled = true
 text = "[center][wave amp=50.0 freq=5.0 connected=1]FINISHED![/wave][/center]"
 fit_content = true
 
-[node name="MarginContainer" type="MarginContainer" parent="Ui/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Ui/Hud"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 2
 
-[node name="RehearsalsCountLabel" type="Label" parent="Ui/PanelContainer/MarginContainer"]
+[node name="RehearsalsCountLabel" type="Label" parent="Ui/Hud/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -94,7 +84,7 @@ theme_override_font_sizes/font_size = 8
 text = "Rehearsal 999"
 vertical_alignment = 1
 
-[node name="RoundCountLabel" type="Label" parent="Ui/PanelContainer/MarginContainer"]
+[node name="RoundCountLabel" type="Label" parent="Ui/Hud/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
@@ -105,20 +95,30 @@ text = "Round 1 of 5"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="Ui"]
+[node name="Darkness" type="ColorRect" parent="Ui"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Screens" type="CenterContainer" parent="Ui"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TitleScreen" type="VBoxContainer" parent="Ui/CenterContainer"]
+[node name="TitleScreen" type="VBoxContainer" parent="Ui/Screens"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Ui/CenterContainer/TitleScreen"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Ui/Screens/TitleScreen"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("5_0u7r0")
 bbcode_enabled = true
@@ -126,23 +126,23 @@ text = "The Contest"
 fit_content = true
 autowrap_mode = 0
 
-[node name="StartRehearsalBtn" type="Button" parent="Ui/CenterContainer/TitleScreen"]
+[node name="StartRehearsalBtn" type="Button" parent="Ui/Screens/TitleScreen"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_0u7r0")
 text = "Rehearse"
 
-[node name="ShowCreditsBtn" type="Button" parent="Ui/CenterContainer/TitleScreen"]
+[node name="ShowCreditsBtn" type="Button" parent="Ui/Screens/TitleScreen"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_0u7r0")
 theme_override_font_sizes/font_size = 8
 text = "Credits"
 
-[node name="FinishedRehearsalScreen" type="VBoxContainer" parent="Ui/CenterContainer"]
+[node name="FinishedRehearsalScreen" type="VBoxContainer" parent="Ui/Screens"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Ui/CenterContainer/FinishedRehearsalScreen"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Ui/Screens/FinishedRehearsalScreen"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("5_0u7r0")
 bbcode_enabled = true
@@ -150,29 +150,29 @@ text = "Ready for the contest?"
 fit_content = true
 autowrap_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Ui/CenterContainer/FinishedRehearsalScreen"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/Screens/FinishedRehearsalScreen"]
 layout_mode = 2
 
-[node name="PracticeAgainBtn" type="Button" parent="Ui/CenterContainer/FinishedRehearsalScreen/HBoxContainer"]
+[node name="PracticeAgainBtn" type="Button" parent="Ui/Screens/FinishedRehearsalScreen/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("5_0u7r0")
 theme_override_font_sizes/font_size = 16
 text = "Rehearse"
 
-[node name="RealDealButton" type="Button" parent="Ui/CenterContainer/FinishedRehearsalScreen/HBoxContainer"]
+[node name="RealDealButton" type="Button" parent="Ui/Screens/FinishedRehearsalScreen/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("5_0u7r0")
 theme_override_font_sizes/font_size = 16
 text = "Let's do it!"
 
-[node name="CreditsScreen" type="VBoxContainer" parent="Ui/CenterContainer"]
+[node name="CreditsScreen" type="VBoxContainer" parent="Ui/Screens"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Ui/CenterContainer/CreditsScreen"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Ui/Screens/CreditsScreen"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("5_0u7r0")
 theme_override_font_sizes/normal_font_size = 8
@@ -187,14 +187,14 @@ Music by ???"
 fit_content = true
 autowrap_mode = 0
 
-[node name="ToTitleScreenBtn" type="Button" parent="Ui/CenterContainer/CreditsScreen"]
+[node name="ToTitleScreenBtn" type="Button" parent="Ui/Screens/CreditsScreen"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("5_0u7r0")
 text = "To title screen"
 
-[connection signal="pressed" from="Ui/CenterContainer/TitleScreen/StartRehearsalBtn" to="." method="_on_start_rehearsal_btn_pressed"]
-[connection signal="pressed" from="Ui/CenterContainer/TitleScreen/ShowCreditsBtn" to="." method="_on_show_credits_btn_pressed"]
-[connection signal="pressed" from="Ui/CenterContainer/FinishedRehearsalScreen/HBoxContainer/PracticeAgainBtn" to="." method="_on_practice_again_btn_pressed"]
-[connection signal="pressed" from="Ui/CenterContainer/FinishedRehearsalScreen/HBoxContainer/RealDealButton" to="." method="_on_real_deal_button_pressed"]
-[connection signal="pressed" from="Ui/CenterContainer/CreditsScreen/ToTitleScreenBtn" to="." method="_on_to_title_screen_btn_pressed"]
+[connection signal="pressed" from="Ui/Screens/TitleScreen/StartRehearsalBtn" to="." method="_on_start_rehearsal_btn_pressed"]
+[connection signal="pressed" from="Ui/Screens/TitleScreen/ShowCreditsBtn" to="." method="_on_show_credits_btn_pressed"]
+[connection signal="pressed" from="Ui/Screens/FinishedRehearsalScreen/HBoxContainer/PracticeAgainBtn" to="." method="_on_practice_again_btn_pressed"]
+[connection signal="pressed" from="Ui/Screens/FinishedRehearsalScreen/HBoxContainer/RealDealButton" to="." method="_on_real_deal_button_pressed"]
+[connection signal="pressed" from="Ui/Screens/CreditsScreen/ToTitleScreenBtn" to="." method="_on_to_title_screen_btn_pressed"]

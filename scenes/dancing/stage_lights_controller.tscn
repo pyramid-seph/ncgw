@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8u6nsahsfi2g"]
+
+[ext_resource type="Script" path="res://scripts/dancing/stage_lights_controller.gd" id="1_hbfww"]
+[ext_resource type="Texture2D" uid="uid://udwoi1v1a0fu" path="res://assets/art/stage_light_on_leader.png" id="2_7uyox"]
+
+[node name="StageLightsController" type="Node2D"]
+script = ExtResource("1_hbfww")
+
+[node name="OneLightSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_7uyox")
+centered = false
+
+[node name="TotalDarkness" type="ColorRect" parent="."]
+visible = false
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 1)
