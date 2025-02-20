@@ -9,6 +9,7 @@ enum State {
 	CREDITS,
 }
 
+var _challenge_gen: ChallengeGenerator = ChallengeGenerator.new()
 var _rehearsals_count: int
 var _challenge: Array[Round]
 var _state: State:
@@ -29,6 +30,7 @@ var _state: State:
 @onready var _rehearsals_count_label: Label = %RehearsalsCountLabel
 @onready var _stage_lights_controller: StageLightsController = %StageLightsController
 @onready var _courtains: Courtains = %Courtains
+@onready var _crowd: Node2D = %Crowd
 
 
 func _ready() -> void:
@@ -60,34 +62,9 @@ func _on_state_changed() -> void:
 			_credits_screen.show()
 
 
-func _generate_challenge() -> Array[Round]:
-	var challenge: Array[Round] = [
-		Round.new(
-			[
-				Round.Step.PRESS_LEFT_BTN,
-				Round.Step.PRESS_LEFT_BTN,
-			],
-		),
-		Round.new(
-			[
-				Round.Step.PRESS_LEFT_BTN,
-			],
-		),
-		Round.new(
-			[
-				Round.Step.PRESS_LEFT_BTN,
-				Round.Step.PRESS_UP_BTN,
-				Round.Step.PRESS_DOWN_BTN,
-				Round.Step.PRESS_RIGHT_BTN,
-			]
-		),
-	]
-	return challenge
-
-
 func _rehearse() -> void:
 	if _rehearsals_count < 1:
-		_challenge = _generate_challenge()
+		_challenge = _challenge_gen.generate()
 	
 	_courtains.close(true)
 	

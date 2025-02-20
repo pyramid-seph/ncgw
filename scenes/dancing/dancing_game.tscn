@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://xfqq48b1q036"]
+[gd_scene load_steps=13 format=3 uid="uid://xfqq48b1q036"]
 
 [ext_resource type="Script" path="res://scripts/dancing/dancing_game.gd" id="1_kx0tl"]
 [ext_resource type="Texture2D" uid="uid://co6r30obi8kbn" path="res://assets/art/theather_dummy.png" id="2_5wlxy"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c5rj4kagg4yy4" path="res://scenes/dancing/courtains.tscn" id="6_goyhv"]
 [ext_resource type="PackedScene" uid="uid://cxw48rle83veb" path="res://scenes/dancing/npc_dancer.tscn" id="6_oto48"]
 [ext_resource type="Texture2D" uid="uid://cbtx7elm7i4m" path="res://assets/art/scenario_curtains.png" id="7_40t4u"]
+[ext_resource type="PackedScene" uid="uid://c2ksbbbmsut7t" path="res://scenes/dancing/person.tscn" id="9_5xqms"]
 [ext_resource type="Texture2D" uid="uid://wh1l645h5omq" path="res://assets/art/scenario_walls.png" id="9_s5j1q"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5gww3"]
@@ -75,7 +76,83 @@ region_rect = Rect2(0, 0, 320, 180)
 metadata/_edit_lock_ = true
 
 [node name="Crowd" type="Node2D" parent="World/Theater"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, 180)
+metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
+
+[node name="Person" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(9, 0)
+
+[node name="Person2" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(23, 0)
+frame = 21
+
+[node name="Person3" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(43, 0)
+frame = 29
+
+[node name="Person4" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(62, -6)
+frame = 38
+
+[node name="Person5" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(79, 7)
+frame = 33
+
+[node name="Person6" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(100, 0)
+frame = 23
+
+[node name="Person7" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(115, 0)
+
+[node name="Person8" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(149, 0)
+frame = 21
+
+[node name="Person9" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(187, 0)
+frame = 29
+
+[node name="Person10" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(133, -6)
+frame = 38
+
+[node name="Person11" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(170, 3)
+frame = 33
+
+[node name="Person12" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(206, 5)
+frame = 23
+
+[node name="Person13" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(222, 1)
+
+[node name="Person15" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(256, 1)
+frame = 29
+
+[node name="Person16" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(237, -5)
+frame = 38
+
+[node name="Person17" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(276, 1)
+frame = 33
+
+[node name="Person14" parent="World/Theater/Crowd/Person17" instance=ExtResource("9_5xqms")]
+position = Vector2(-4, 0)
+frame = 21
+
+[node name="Person18" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(315, 1)
+frame = 23
+
+[node name="Person19" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(292, 1)
 
 [node name="TheaterDummy" type="Sprite2D" parent="World"]
 visible = false
