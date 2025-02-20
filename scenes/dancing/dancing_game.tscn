@@ -31,6 +31,11 @@ unique_name_in_owner = true
 position = Vector2(200, 116)
 _debug_show_btn_mapping = false
 
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(120, 0)
+color = Color(1, 1, 1, 0.352941)
+polygon = PackedVector2Array(0, 0, 24, 136, -24, 136)
+
 [node name="Courtains" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(16, 0)
