@@ -74,6 +74,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			anim_name == &"step_right" or \
 			anim_name == &"step_up" or \
 			anim_name == &"step_down":
+		if not _steps.is_empty() and _step_idx + 1 < _steps.size():
+			await create_tween().tween_interval(0.2).finished
 		_advance_to_next_step()
 	elif anim_name == &"bow":
 		_animation_player.play(&"idle")
