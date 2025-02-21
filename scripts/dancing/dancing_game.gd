@@ -10,6 +10,7 @@ enum State {
 }
 
 const SFX_CRUSH = preload("res://assets/audio/sfx/sfx_crush.wav")
+const BGM = preload("res://assets/audio/bgm/bgm.wav")
 
 var _challenge_gen: ChallengeGenerator = ChallengeGenerator.new()
 var _nailed_steps: int
@@ -172,6 +173,7 @@ func _participate_in_contest() -> void:
 	_round_count_label.text = ""
 	var round_count: int = 0
 	
+	SoundManager.play_music(BGM)
 	for curr_round: Round in _challenge:
 		round_count += 1
 		await create_tween().tween_interval(1.5).finished
@@ -217,7 +219,7 @@ func _participate_in_contest() -> void:
 		_stage_lights_controller.shine_light_on_player()
 		_player.attempt_steps(steps)
 		await _player.steps_completed
-	
+	SoundManager.stop_music(1.0)
 	_stage_lights_controller.turn_on_lights()
 	_leader.btn_map_wheel.hide()
 	# TODO Play some claps
@@ -245,7 +247,7 @@ func _participate_in_contest() -> void:
 	if is_perfect:
 		_you_are_label.text = "You are PERFECT!"
 	else:
-		_you_are_label.text = "You are not perfect."
+		_you_are_label.text = "You are NOT perfect."
 	_results.show()
 	await create_tween().tween_interval(3).finished
 	_results.hide()
