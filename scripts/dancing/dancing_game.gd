@@ -11,6 +11,9 @@ enum State {
 
 const SFX_CRUSH = preload("res://assets/audio/sfx/sfx_crush.wav")
 const BGM = preload("res://assets/audio/bgm/bgm.wav")
+const SFX_CLAPS_OPENING = preload("res://assets/audio/sfx/sfx_claps_opening.wav")
+const SFX_CLAPS_ENDING_PERFECT = preload("res://assets/audio/sfx/sfx_claps_ending_perfect.wav")
+const SFX_CLAPS_ENDING_IMPERFECT = preload("res://assets/audio/sfx/sfx_claps_ending_imperfect.wav")
 
 var _challenge_gen: ChallengeGenerator = ChallengeGenerator.new()
 var _nailed_steps: int
@@ -160,10 +163,11 @@ func _participate_in_contest() -> void:
 	_failures_label.text = "Fails: %s" % _failed_steps
 	
 	_darkness.hide()
-	await create_tween().tween_interval(2.0).finished
+	await create_tween().tween_interval(1.0).finished
+	SoundManager.play_sound(SFX_CLAPS_OPENING)
 	_courtains.open()
 	await _courtains.opened
-	await create_tween().tween_interval(2.0).finished
+	await create_tween().tween_interval(0.5).finished
 	_player.bow()
 	_leader.bow()
 	await _leader.bowed
@@ -223,10 +227,6 @@ func _participate_in_contest() -> void:
 	SoundManager.stop_music(1.0)
 	_stage_lights_controller.turn_on_lights()
 	_leader.btn_map_wheel.hide()
-	# TODO Play some claps
-	_player.bow()
-	_leader.bow()
-	await _leader.bowed
 	await create_tween().tween_interval(1.0).finished
 	_courtains.close()
 	await _courtains.closed
@@ -255,10 +255,10 @@ func _participate_in_contest() -> void:
 	_results.hide()
 	
 	if is_perfect:
+		SoundManager.play_sound(SFX_CLAPS_ENDING_PERFECT)
 		_courtains.open()
 		await _courtains.opened
 		await create_tween().tween_interval(1).finished
-		# TODO More people cheering!
 		for i: int in 2:
 			_leader.bow()
 			await _leader.bowed
@@ -275,7 +275,14 @@ func _participate_in_contest() -> void:
 		await ending_tween.finished
 		await create_tween().tween_interval(4.0).finished
 	else:
-		await create_tween().tween_interval(1.0).finished
+		_courtains.open()
+		await _courtains.opened
+		await create_tween().tween_interval(1).finished
+		SoundManager.play_sound(SFX_CLAPS_ENDING_IMPERFECT)
+		_player.bow()
+		_leader.bow()
+		await _leader.bowed
+		await create_tween().tween_interval(1.6).finished
 	Log.d("---------- THE END ----------")
 	_state = State.TITLE_SCREEN
 

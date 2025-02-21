@@ -97,7 +97,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_ihl27"]
 resource_name = "step_down"
-length = 0.5
+length = 0.45
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -106,7 +106,7 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.15, 0.2, 0.25, 0.4, 0.5),
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.2, 0.25, 0.4, 0.45),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [36, 35, 37, 38, 39, 38, 15]
@@ -160,7 +160,7 @@ tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_w55wg"]
 resource_name = "step_left"
-length = 0.5
+length = 0.45
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -169,7 +169,7 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.15, 0.35, 0.4, 0.5),
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.35, 0.4, 0.45),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [21, 22, 23, 22, 21, 15]
@@ -192,7 +192,7 @@ tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_k84sk"]
 resource_name = "step_right"
-length = 0.5
+length = 0.45
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -201,7 +201,7 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.15, 0.35, 0.4, 0.5),
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.35, 0.4, 0.45),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [25, 26, 27, 26, 25, 15]
@@ -224,7 +224,7 @@ tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_7sps6"]
 resource_name = "step_up"
-length = 0.5
+length = 0.45
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -233,7 +233,7 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.4, 0.5),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.4, 0.45),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [28, 29, 30, 31, 32, 33, 30, 15]
