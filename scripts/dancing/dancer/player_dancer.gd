@@ -30,8 +30,8 @@ var _can_attempt_step: bool
 
 func _ready() -> void:
 	_on_btn_map_set()
-	var animation_length: float = _animation_player.current_animation_length
-	_animation_player.play(_animation_player.current_animation)
+	var animation_length: float = _animation_player.get_animation(&"idle").length
+	_animation_player.play(&"idle")
 	_animation_player.seek(randf_range(0.0, animation_length))
 
 
