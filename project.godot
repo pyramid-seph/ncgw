@@ -14,7 +14,7 @@ config/name="ncgw"
 config/version="1.0"
 run/main_scene="res://scenes/dancing/dancing_game.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://assets/art/icon.svg"
+config/icon="res://assets/art/icon.png"
 
 [autoload]
 
