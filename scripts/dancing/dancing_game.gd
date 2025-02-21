@@ -104,14 +104,9 @@ func _rehearse() -> void:
 	_player.btn_map = btn_map
 	
 	_darkness.hide()
-	await create_tween().tween_interval(2.0).finished
-	_courtains.open() # TODO This should only happen on the real deal
+	_courtains.open(true)
 	await _courtains.opened
 	await create_tween().tween_interval(2.0).finished
-	_player.bow()
-	_leader.bow()
-	await _leader.bowed
-	await create_tween().tween_interval(1.0).finished
 	_stage_lights_controller.turn_off_lights()
 	_round_count_label.show()
 	_round_count_label.text = ""
@@ -137,9 +132,7 @@ func _rehearse() -> void:
 		await _player.steps_completed
 	_stage_lights_controller.turn_on_lights()
 	_leader.btn_map_wheel.hide()
-	await create_tween().tween_interval(3.0).finished
-	_courtains.close() # TODO This should only happen on the real deal
-	await _courtains.closed
+	await create_tween().tween_interval(2.0).finished
 	_round_count_label.hide()
 	_rehearsals_count_label.hide()
 	_finished_container.show()

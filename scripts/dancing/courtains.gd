@@ -8,7 +8,12 @@ signal closed
 var _tween: Tween
 
 
-func open() -> void:
+func open(immediate: bool = false) -> void:
+	if immediate:
+		position.y = -160.0
+		opened.emit.call_deferred()
+		return
+	
 	if _tween:
 		_tween.kill()
 	_tween = create_tween()
