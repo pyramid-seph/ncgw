@@ -93,6 +93,7 @@ func _rehearse() -> void:
 	_courtains.close(true)
 	
 	_rehearsals_count += 1
+	Log.d("---------- REHEARSAL %s ----------" % _rehearsals_count)
 	_rehearsals_count_label.show()
 	_rehearsals_count_label.text = "Rehearsal %s" % _rehearsals_count
 	_failures_label.text = "Fails: %s" % _failed_steps
@@ -125,6 +126,9 @@ func _rehearse() -> void:
 		_leader.btn_map_wheel.show()
 		await create_tween().tween_interval(0.5).finished
 		var steps: Array[Round.Step] = curr_round.steps
+		if OS.is_debug_build():
+			Log.d("Round %s steps are: %s" % [
+					round_count, _get_steps_as_string(steps)])
 		_leader.perform_steps(steps)
 		await _leader.steps_completed
 		await create_tween().tween_interval(0.5).finished
@@ -146,6 +150,8 @@ func _rehearse() -> void:
 
 
 func _participate_in_contest() -> void:
+	Log.d("---------- CONTEST ----------")
+	
 	_nailed_steps = 0
 	_failed_steps = 0
 	_max_step_streak = 0
@@ -209,7 +215,8 @@ func _participate_in_contest() -> void:
 			steps.reverse()
 		
 		if OS.is_debug_build():
-			Log.d("Correct inputs are: %s" % _get_steps_as_string(steps))
+			Log.d("Round %s steps are: %s" % [
+					round_count, _get_steps_as_string(steps)])
 		
 		_leader.perform_steps(steps)
 		await _leader.steps_completed
@@ -270,6 +277,7 @@ func _participate_in_contest() -> void:
 		await create_tween().tween_interval(4.0).finished
 	else:
 		await create_tween().tween_interval(1.0).finished
+	Log.d("---------- THE END ----------")
 	_state = State.TITLE_SCREEN
 
 
@@ -282,11 +290,11 @@ func _get_steps_as_string(steps: Array[Round.Step]) -> String:
 	for step: Round.Step in steps:
 		match step:
 			Round.Step.PRESS_LEFT_BTN:
-				result += " <-, "
+				result += " <- "
 			Round.Step.PRESS_RIGHT_BTN:
-				result += " ->, "
+				result += " -> "
 			Round.Step.PRESS_UP_BTN:
-				result += " ^, "
+				result += " ^ "
 			Round.Step.PRESS_DOWN_BTN:
 				result += " v "
 	result += " ]"
@@ -302,6 +310,7 @@ func _on_player_step_attempted(_step: Round.Step, success: bool) -> void:
 
 
 func _on_start_rehearsal_btn_pressed() -> void:
+	Log.d("\n\n---------- START! ----------")
 	_state = State.PLAYING_REHEARSALS
 
 

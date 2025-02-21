@@ -152,4 +152,5 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			anim_name == &"step_error":
 		_attempt_next_step ()
 	elif anim_name == &"bow":
+		_animation_player.play(&"idle")
 		bowed.emit()
