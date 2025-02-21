@@ -61,7 +61,7 @@ func _on_state_changed() -> void:
 	_round_count_label.hide()
 	_rehearsals_count_label.hide()
 	_leader.btn_map_wheel.hide()
-	_stage_lights_controller.turn_on_lights()
+	_stage_lights_controller.turn_on_lights(true)
 	_failures_label.hide()
 	_results.hide()
 	_player.show()
@@ -169,11 +169,12 @@ func _participate_in_contest() -> void:
 	await _leader.bowed
 	await create_tween().tween_interval(1.0).finished
 	_stage_lights_controller.turn_off_lights()
+	await create_tween().tween_interval(0.5).finished
+	SoundManager.play_music(BGM)
+	
 	_round_count_label.show()
 	_round_count_label.text = ""
 	var round_count: int = 0
-	
-	SoundManager.play_music(BGM)
 	for curr_round: Round in _challenge:
 		round_count += 1
 		await create_tween().tween_interval(1.5).finished
@@ -232,6 +233,7 @@ func _participate_in_contest() -> void:
 	_round_count_label.hide()
 	_rehearsals_count_label.hide()
 	_failures_label.hide()
+	await create_tween().tween_interval(1).finished
 	_finished_container.show()
 	await create_tween().tween_interval(3.0).finished
 	_finished_container.hide()
@@ -249,7 +251,7 @@ func _participate_in_contest() -> void:
 	else:
 		_you_are_label.text = "You are NOT perfect."
 	_results.show()
-	await create_tween().tween_interval(3).finished
+	await create_tween().tween_interval(4).finished
 	_results.hide()
 	
 	if is_perfect:
@@ -266,8 +268,10 @@ func _participate_in_contest() -> void:
 		ending_tween.tween_property(_foot, "position:y", -13, 0.1).from(-150)
 		ending_tween.tween_callback(_player.hide)
 		ending_tween.tween_callback(_leader.hide)
-		ending_tween.tween_property(_foot, "position:y", -4, 0.05)
-		ending_tween.tween_callback(SoundManager.play_sound.bind(SFX_CRUSH))
+		ending_tween.parallel().tween_property(_foot, "position:y", -4, 0.05)
+		ending_tween.parallel().tween_callback(SoundManager.play_sound.bind(SFX_CRUSH))
+		ending_tween.tween_property(_crowd, "position:y", -8, 0.05).as_relative()
+		ending_tween.tween_property(_crowd, "position:y", 8, 0.05).as_relative()
 		await ending_tween.finished
 		await create_tween().tween_interval(4.0).finished
 	else:
