@@ -311,8 +311,8 @@ texture = ExtResource("4_8vexq")
 hframes = 5
 frame = 4
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0.131742, 0.131742, 0.131742, 1)
+[node name="Shadow" type="Sprite2D" parent="."]
+self_modulate = Color(0.133333, 0.133333, 0.133333, 0.698039)
 show_behind_parent = true
 position = Vector2(0, 13)
 texture = ExtResource("10_qeuef")
