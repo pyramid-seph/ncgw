@@ -43,7 +43,6 @@ var _state: State:
 @onready var _nailed_score_label: Label = %NailedScoreLabel
 @onready var _rehearsals_score_label: Label = %RehearsalsScoreLabel
 @onready var _you_are_label: Label = %YouAreLabel
-@onready var _close_results_btn: Button = %CloseResultsBtn
 @onready var _total_score_label: Label = %TotalScoreLabel
 
 
@@ -158,16 +157,11 @@ func _participate_in_contest() -> void:
 	_courtains.close(true)
 	_crowd.show()
 	_failures_label.show()
-	
 	_failures_label.text = "Fails: %s" % _failed_steps
-	
-	var btn_map: ButtonMap = ButtonMap.new()
-	_leader.btn_map_wheel.show_button_map(btn_map, true)
-	_player.btn_map = btn_map
 	
 	_darkness.hide()
 	await create_tween().tween_interval(2.0).finished
-	_courtains.open() # TODO This should only happen on the real deal
+	_courtains.open()
 	await _courtains.opened
 	await create_tween().tween_interval(2.0).finished
 	_player.bow()
@@ -185,16 +179,45 @@ func _participate_in_contest() -> void:
 		_stage_lights_controller.shine_light_on_leader()
 		_round_count_label.text = \
 				"Round %s of %s" % [round_count, _challenge.size()]
+		
+		# Set traps
+		#   > Button map traps
+		var btn_map_changed: bool = false
+		var btn_map: ButtonMap = ButtonMap.new()
+		Log.d("Round %s has these traps: %s" % [round_count, curr_round.traps])
+		if curr_round.traps & Round.Traps.INVERT_VERT_BTNS:
+			Log.d("Round %s has invert VERT trap." % round_count)
+			btn_map_changed = true
+			btn_map.up = &"btn_down"
+			btn_map.down = &"btn_up"
+		if curr_round.traps & Round.Traps.INVERT_HOR_BTNS:
+			Log.d("Round %s has invert HOR trap." % round_count)
+			btn_map_changed = true
+			btn_map.left = &"btn_right"
+			btn_map.right = &"btn_left"
+		_player.btn_map = btn_map
 		_leader.btn_map_wheel.show()
+		var skip_roulette_anim: bool = not btn_map_changed
+		_leader.btn_map_wheel.show_button_map(btn_map, skip_roulette_anim)
+		await _leader.btn_map_wheel.new_btn_config_shown
+		
+		#   > Reverse steps trap
 		await create_tween().tween_interval(0.5).finished
-		var steps: Array[Round.Step] = curr_round.steps
+		var steps: Array[Round.Step] = curr_round.steps.duplicate()
+		if curr_round.traps & Round.Traps.REVERSE_STEPS:
+			Log.d("Round %s has reverse trap." % round_count)
+			steps.reverse()
+		
+		if OS.is_debug_build():
+			Log.d("Correct inputs are: %s" % _get_steps_as_string(steps))
+		
 		_leader.perform_steps(steps)
 		await _leader.steps_completed
 		await create_tween().tween_interval(0.5).finished
-		# TODO Apply traps!
 		_stage_lights_controller.shine_light_on_player()
 		_player.attempt_steps(steps)
 		await _player.steps_completed
+	
 	_stage_lights_controller.turn_on_lights()
 	_leader.btn_map_wheel.hide()
 	# TODO Play some claps
@@ -202,7 +225,7 @@ func _participate_in_contest() -> void:
 	_leader.bow()
 	await _leader.bowed
 	await create_tween().tween_interval(1.0).finished
-	_courtains.close() # TODO This should only happen on the real deal
+	_courtains.close()
 	await _courtains.closed
 	_round_count_label.hide()
 	_rehearsals_count_label.hide()
@@ -252,6 +275,22 @@ func _participate_in_contest() -> void:
 
 func _accum_steps(accum, this_round) -> int:
 	return accum + this_round.steps.size()
+
+
+func _get_steps_as_string(steps: Array[Round.Step]) -> String:
+	var result: String = "[ "
+	for step: Round.Step in steps:
+		match step:
+			Round.Step.PRESS_LEFT_BTN:
+				result += " <-, "
+			Round.Step.PRESS_RIGHT_BTN:
+				result += " ->, "
+			Round.Step.PRESS_UP_BTN:
+				result += " ^, "
+			Round.Step.PRESS_DOWN_BTN:
+				result += " v "
+	result += " ]"
+	return result
 
 
 func _on_player_step_attempted(_step: Round.Step, success: bool) -> void:
