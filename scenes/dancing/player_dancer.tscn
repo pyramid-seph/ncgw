@@ -276,6 +276,7 @@ vframes = 7
 script = ExtResource("1_5g23a")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
