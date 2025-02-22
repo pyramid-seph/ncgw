@@ -1,0 +1,381 @@
+[gd_scene load_steps=23 format=3 uid="uid://c7aiuxci678pf"]
+
+[ext_resource type="Script" path="res://scripts/dancing/dancer/player_dancer.gd" id="1_5g23a"]
+[ext_resource type="Texture2D" uid="uid://bbjwna7dqivjw" path="res://assets/art/spritesheet_dancer.png" id="1_8p8hc"]
+[ext_resource type="AudioStream" uid="uid://cpkk8ot6cm2n1" path="res://assets/audio/sfx/sfx_press_down.wav" id="2_gtfkh"]
+[ext_resource type="AudioStream" uid="uid://yiwspn6a337n" path="res://assets/audio/sfx/sfx_press_left.wav" id="4_g56r2"]
+[ext_resource type="AudioStream" uid="uid://cl325ixpa6uo1" path="res://assets/audio/sfx/sfx_step_error.wav" id="4_xrl3x"]
+[ext_resource type="AudioStream" uid="uid://38v48jqn8mba" path="res://assets/audio/sfx/sfx_press_right.wav" id="5_2gu5p"]
+[ext_resource type="AudioStream" uid="uid://ce4pdrhyjlpht" path="res://assets/audio/sfx/sfx_press_up.wav" id="6_blfdd"]
+[ext_resource type="Script" path="res://scripts/dancing/btn_map_wheel.gd" id="8_wt4al"]
+[ext_resource type="Texture2D" uid="uid://bd6c0ppfryfih" path="res://assets/art/btn_keyboard.png" id="9_p8v3c"]
+[ext_resource type="Texture2D" uid="uid://dln3ogm8yv4kg" path="res://assets/art/shadow.png" id="10_kjnim"]
+[ext_resource type="FontFile" uid="uid://m3wbmrled4kn" path="res://assets/fonts/kenney/kenney_mini.ttf" id="11_d2c0d"]
+
+[sub_resource type="Animation" id="Animation_lfedq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ewhgh"]
+resource_name = "bow"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [15, 16, 17, 18, 19, 18, 17, 16, 15]
+}
+
+[sub_resource type="Animation" id="Animation_yg5rl"]
+resource_name = "cooldown"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [10, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_vaxqd"]
+resource_name = "idle"
+length = 1.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2, 4, 0, 5, 6, 7, 6, 5]
+}
+
+[sub_resource type="Animation" id="Animation_ponb5"]
+resource_name = "remember"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_ihl27"]
+resource_name = "step_down"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.2, 0.25, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [36, 35, 37, 38, 39, 38, 15]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_gtfkh")
+}],
+"times": PackedFloat32Array(0.1)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_dhxlx"]
+resource_name = "step_error"
+length = 0.45
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [42, 41, 42, 41, 42, 15]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_xrl3x")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_w55wg"]
+resource_name = "step_left"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [21, 22, 23, 22, 21, 15]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_g56r2")
+}],
+"times": PackedFloat32Array(0.1)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_k84sk"]
+resource_name = "step_right"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [25, 26, 27, 26, 25, 15]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_2gu5p")
+}],
+"times": PackedFloat32Array(0.1)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_7sps6"]
+resource_name = "step_up"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [28, 29, 30, 31, 32, 33, 30, 15]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_blfdd")
+}],
+"times": PackedFloat32Array(0.1)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f0p1f"]
+_data = {
+"RESET": SubResource("Animation_lfedq"),
+"bow": SubResource("Animation_ewhgh"),
+"cooldown": SubResource("Animation_yg5rl"),
+"idle": SubResource("Animation_vaxqd"),
+"remember": SubResource("Animation_ponb5"),
+"step_down": SubResource("Animation_ihl27"),
+"step_error": SubResource("Animation_dhxlx"),
+"step_left": SubResource("Animation_w55wg"),
+"step_right": SubResource("Animation_k84sk"),
+"step_up": SubResource("Animation_7sps6")
+}
+
+[node name="PlayerDancer" type="Sprite2D"]
+self_modulate = Color(0, 0.494118, 0.85098, 1)
+texture = ExtResource("1_8p8hc")
+hframes = 7
+vframes = 7
+script = ExtResource("1_5g23a")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f0p1f")
+}
+autoplay = "idle"
+
+[node name="BtnMapWheel" type="Node2D" parent="."]
+visible = false
+script = ExtResource("8_wt4al")
+
+[node name="BtnTopSprite2D" type="Sprite2D" parent="BtnMapWheel"]
+position = Vector2(0, -24)
+texture = ExtResource("9_p8v3c")
+hframes = 5
+frame = 4
+
+[node name="BtnBottomSprite2D" type="Sprite2D" parent="BtnMapWheel"]
+position = Vector2(0, 24)
+texture = ExtResource("9_p8v3c")
+hframes = 5
+frame = 4
+
+[node name="BtnLeftSprite2D" type="Sprite2D" parent="BtnMapWheel"]
+position = Vector2(-24, 0)
+texture = ExtResource("9_p8v3c")
+hframes = 5
+frame = 4
+
+[node name="BtnRightSprite2D" type="Sprite2D" parent="BtnMapWheel"]
+position = Vector2(24, 0)
+texture = ExtResource("9_p8v3c")
+hframes = 5
+frame = 4
+
+[node name="Shadow" type="Sprite2D" parent="."]
+self_modulate = Color(0.133333, 0.133333, 0.133333, 0.698039)
+show_behind_parent = true
+position = Vector2(0, 13)
+texture = ExtResource("10_kjnim")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -19.0
+offset_top = -25.0
+offset_right = -4.0
+offset_bottom = -15.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("11_d2c0d")
+theme_override_font_sizes/font_size = 8
+text = "YOU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="Label"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -11.0
+offset_right = 9.0
+offset_bottom = 10.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 0.552941)
+
+[node name="CurrStepLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_top = 19.0
+offset_right = 10.0
+offset_bottom = 29.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("11_d2c0d")
+theme_override_font_sizes/font_size = 8
+text = "Step 1 of 8"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CurrStepLabel"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_right = 25.0
+offset_bottom = 10.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 0.552941)
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

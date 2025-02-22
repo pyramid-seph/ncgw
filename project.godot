@@ -11,19 +11,20 @@ config_version=5
 [application]
 
 config/name="ncgw"
-config/version="1.0"
-run/main_scene="res://scenes/title_screen/title_screen.tscn"
+config/version="brackeys-game-jam-2025.1_1.0.0"
+run/main_scene="res://scenes/dancing/dancing_game.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://assets/art/icon.svg"
+config/icon="res://assets/art/icon.png"
 
 [autoload]
 
 SoundManager="*res://addons/sound_manager/sound_manager.gd"
+ScreenshotTool="*res://scripts/autoloads/screenshot_tool.gd"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=360
+window/size/viewport_width=320
+window/size/viewport_height=180
 window/size/resizable=false
 window/size/window_width_override=1280
 window/size/window_height_override=720
@@ -34,15 +35,39 @@ window/stretch/scale_mode="integer"
 
 enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
 
+[input]
+
+btn_right={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"location":0,"echo":false,"script":null)
+]
+}
+btn_left={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":97,"location":0,"echo":false,"script":null)
+]
+}
+btn_up={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"location":0,"echo":false,"script":null)
+]
+}
+btn_down={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"location":0,"echo":false,"script":null)
+]
+}
+take_screenshot={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":84,"key_label":0,"unicode":116,"location":0,"echo":false,"script":null)
+]
+}
+
 [layer_names]
 
 2d_physics/layer_1="player"
 2d_physics/layer_2="npc"
 2d_physics/layer_3="object"
-
-[physics]
-
-common/physics_interpolation=true
 
 [rendering]
 
