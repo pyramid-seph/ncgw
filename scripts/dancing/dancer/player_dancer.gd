@@ -26,10 +26,12 @@ var _can_attempt_step: bool
 
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _btn_map_wheel: BtnMapWheel = $BtnMapWheel
+@onready var _curr_step_label: Label = $CurrStepLabel
 
 
 func _ready() -> void:
 	_on_btn_map_set()
+	_curr_step_label.hide()
 	var animation_length: float = _animation_player.get_animation(&"idle").length
 	_animation_player.play(&"idle")
 	_animation_player.seek(randf_range(0.0, animation_length))
@@ -82,6 +84,7 @@ func attempt_steps(new_steps: Array[Round.Step]) -> void:
 
 
 func cancel() -> void:
+	_curr_step_label.hide()
 	_animation_player.play(&"idle")
 	_can_attempt_step = false
 	_step_idx = -1
@@ -99,6 +102,8 @@ func bow() -> void:
 func _attempt_next_step() -> void:
 	_step_idx += 1
 	if not _steps.is_empty() and _step_idx < _steps.size():
+		_curr_step_label.show()
+		_curr_step_label.text = "Step %s of %s" % [_step_idx + 1, _steps.size()]
 		_can_attempt_step = true
 	else:
 		cancel()
