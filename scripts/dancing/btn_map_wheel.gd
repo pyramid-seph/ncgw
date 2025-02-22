@@ -4,7 +4,7 @@ extends Node2D
 
 signal new_btn_config_shown
 
-const SFX_ROULETTE = preload("res://assets/audio/sfx/kenney_interface_sounds/drop_003.ogg")
+const SFX_ROULETTE = preload("res://assets/audio/sfx/sfx_roulette.wav")
 
 const BTN_FRAME_LEFT: int = 0
 const BTN_FRAME_RIGHT: int = 1

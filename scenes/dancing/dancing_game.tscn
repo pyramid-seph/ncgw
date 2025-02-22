@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://xfqq48b1q036"]
+[gd_scene load_steps=16 format=3 uid="uid://xfqq48b1q036"]
 
 [ext_resource type="Script" path="res://scripts/dancing/dancing_game.gd" id="1_kx0tl"]
 [ext_resource type="Texture2D" uid="uid://co6r30obi8kbn" path="res://assets/art/theather_dummy.png" id="2_5wlxy"]
@@ -15,6 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://bsaukh7qnmm6j" path="res://assets/art/foot.png" id="10_rhb4r"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5gww3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1qk2a"]
+bg_color = Color(0, 0, 0, 0.901961)
 
 [node name="DancingGame" type="Node2D"]
 script = ExtResource("1_kx0tl")
@@ -252,6 +255,7 @@ layout_mode = 2
 [node name="PanelContainer" type="PanelContainer" parent="Ui/Hud/Results"]
 layout_mode = 2
 mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_1qk2a")
 
 [node name="MarginContainer" type="MarginContainer" parent="Ui/Hud/Results/PanelContainer"]
 layout_mode = 2
@@ -350,7 +354,7 @@ theme_override_constants/separation = 8
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("5_0u7r0")
 bbcode_enabled = true
-text = "The Contest"
+text = "- The Contest -"
 fit_content = true
 autowrap_mode = 0
 
@@ -408,13 +412,10 @@ layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("5_0u7r0")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "Game and art By Pyramid Seph
+text = "Programming, sound and sprites by Pyramid Seph
 
-SFXs by Kenney
-
-Fonts by Kenney and 
-
-Music by ???"
+Fonts by Kenney 
+(https://kenney.nl/)"
 fit_content = true
 autowrap_mode = 0
 

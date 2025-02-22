@@ -14,6 +14,10 @@ const BGM = preload("res://assets/audio/bgm/bgm.wav")
 const SFX_CLAPS_OPENING = preload("res://assets/audio/sfx/sfx_claps_opening.wav")
 const SFX_CLAPS_ENDING_PERFECT = preload("res://assets/audio/sfx/sfx_claps_ending_perfect.wav")
 const SFX_CLAPS_ENDING_IMPERFECT = preload("res://assets/audio/sfx/sfx_claps_ending_imperfect.wav")
+const SFX_SCREAMS = preload("res://assets/audio/sfx/sfx_screams.wav")
+const SFX_RESULT_IMPERFECT = preload("res://assets/audio/sfx/sfx_result_imperfect.wav")
+const SFX_RESULT_PERFECT = preload("res://assets/audio/sfx/sfx_result_perfect.wav")
+const SFX_FINISHED = preload("res://assets/audio/sfx/sfx_finished.wav")
 
 var _challenge_gen: ChallengeGenerator = ChallengeGenerator.new()
 var _nailed_steps: int
@@ -56,6 +60,7 @@ func _ready() -> void:
 
 func _on_state_changed() -> void:
 	_crowd.hide()
+	_crowd.position = Vector2(0, 180)
 	_darkness.hide()
 	_title_screen.hide()
 	_credits_screen.hide()
@@ -139,6 +144,7 @@ func _rehearse() -> void:
 	await create_tween().tween_interval(2.0).finished
 	_round_count_label.hide()
 	_rehearsals_count_label.hide()
+	SoundManager.play_sound(SFX_FINISHED)
 	_finished_container.show()
 	await create_tween().tween_interval(3.0).finished
 	_finished_container.hide()
@@ -228,15 +234,17 @@ func _participate_in_contest() -> void:
 	_stage_lights_controller.turn_on_lights()
 	_leader.btn_map_wheel.hide()
 	await create_tween().tween_interval(1.0).finished
-	_courtains.close()
-	await _courtains.closed
 	_round_count_label.hide()
 	_rehearsals_count_label.hide()
 	_failures_label.hide()
-	await create_tween().tween_interval(1).finished
+	SoundManager.play_sound(SFX_FINISHED)
 	_finished_container.show()
 	await create_tween().tween_interval(3.0).finished
 	_finished_container.hide()
+	await create_tween().tween_interval(1).finished
+	_courtains.close()
+	await _courtains.closed
+	await create_tween().tween_interval(1).finished
 	
 	var nailed_score: int = _nailed_steps * 100
 	var rehearsals_penalty: int = maxi(0, _rehearsals_count - 1) * 25
@@ -251,6 +259,12 @@ func _participate_in_contest() -> void:
 	else:
 		_you_are_label.text = "You are NOT perfect."
 	_results.show()
+	
+	if is_perfect:
+		SoundManager.play_sound(SFX_RESULT_PERFECT)
+	else:
+		SoundManager.play_sound(SFX_RESULT_IMPERFECT)
+	
 	await create_tween().tween_interval(4).finished
 	_results.hide()
 	
@@ -273,7 +287,13 @@ func _participate_in_contest() -> void:
 		ending_tween.tween_property(_crowd, "position:y", -8, 0.05).as_relative()
 		ending_tween.tween_property(_crowd, "position:y", 8, 0.05).as_relative()
 		await ending_tween.finished
-		await create_tween().tween_interval(4.0).finished
+		await create_tween().tween_interval(2.0).finished
+		var scream_tween: Tween = create_tween()
+		scream_tween.set_loops()
+		scream_tween.tween_property(_crowd, "position:y", -8, 0.05).as_relative()
+		scream_tween.tween_property(_crowd, "position:y", 8, 0.05).as_relative()
+		await SoundManager.play_sound(SFX_SCREAMS).finished
+		scream_tween.kill()
 	else:
 		_courtains.open()
 		await _courtains.opened

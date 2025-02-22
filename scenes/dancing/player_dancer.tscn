@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scripts/dancing/dancer/player_dancer.gd" id="1_5g23a"]
 [ext_resource type="Texture2D" uid="uid://bbjwna7dqivjw" path="res://assets/art/spritesheet_dancer.png" id="1_8p8hc"]
 [ext_resource type="AudioStream" uid="uid://cpkk8ot6cm2n1" path="res://assets/audio/sfx/sfx_press_down.wav" id="2_gtfkh"]
-[ext_resource type="AudioStream" uid="uid://b7wbal3f6yfhw" path="res://assets/audio/sfx/kenney_interface_sounds/error_008.ogg" id="3_sa0nx"]
 [ext_resource type="AudioStream" uid="uid://yiwspn6a337n" path="res://assets/audio/sfx/sfx_press_left.wav" id="4_g56r2"]
+[ext_resource type="AudioStream" uid="uid://cl325ixpa6uo1" path="res://assets/audio/sfx/sfx_step_error.wav" id="4_xrl3x"]
 [ext_resource type="AudioStream" uid="uid://38v48jqn8mba" path="res://assets/audio/sfx/sfx_press_right.wav" id="5_2gu5p"]
 [ext_resource type="AudioStream" uid="uid://ce4pdrhyjlpht" path="res://assets/audio/sfx/sfx_press_up.wav" id="6_blfdd"]
 [ext_resource type="Script" path="res://scripts/dancing/btn_map_wheel.gd" id="8_wt4al"]
@@ -129,7 +129,7 @@ tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_dhxlx"]
 resource_name = "step_error"
-length = 0.5
+length = 0.45
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -137,7 +137,7 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.45),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [42, 41, 42, 41, 42, 15]
@@ -152,9 +152,9 @@ tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("3_sa0nx")
+"stream": ExtResource("4_xrl3x")
 }],
-"times": PackedFloat32Array(0.1)
+"times": PackedFloat32Array(0)
 }
 tracks/1/use_blend = true
 

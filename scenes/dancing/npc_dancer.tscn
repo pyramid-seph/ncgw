@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/dancing/dancer/npc_dancer.gd" id="2_h8eny"]
 [ext_resource type="Script" path="res://scripts/dancing/btn_map_wheel.gd" id="3_38rpx"]
 [ext_resource type="AudioStream" uid="uid://cpkk8ot6cm2n1" path="res://assets/audio/sfx/sfx_press_down.wav" id="3_fwsko"]
-[ext_resource type="AudioStream" uid="uid://b7wbal3f6yfhw" path="res://assets/audio/sfx/kenney_interface_sounds/error_008.ogg" id="3_rqijd"]
+[ext_resource type="AudioStream" uid="uid://cl325ixpa6uo1" path="res://assets/audio/sfx/sfx_step_error.wav" id="4_4xn1h"]
 [ext_resource type="Texture2D" uid="uid://bd6c0ppfryfih" path="res://assets/art/btn_keyboard.png" id="4_8vexq"]
 [ext_resource type="AudioStream" uid="uid://yiwspn6a337n" path="res://assets/audio/sfx/sfx_press_left.wav" id="5_2uwoy"]
 [ext_resource type="AudioStream" uid="uid://38v48jqn8mba" path="res://assets/audio/sfx/sfx_press_right.wav" id="6_0wivl"]
@@ -129,7 +129,6 @@ tracks/1/use_blend = true
 [sub_resource type="Animation" id="Animation_dhxlx"]
 resource_name = "step_error"
 length = 0.2
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -152,7 +151,7 @@ tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("3_rqijd")
+"stream": ExtResource("4_4xn1h")
 }],
 "times": PackedFloat32Array(0)
 }
