@@ -52,10 +52,12 @@ var _state: State:
 @onready var _rehearsals_score_label: Label = %RehearsalsScoreLabel
 @onready var _you_are_label: Label = %YouAreLabel
 @onready var _total_score_label: Label = %TotalScoreLabel
+@onready var _version_label: Label = $Ui/Screens/TitleScreen/VersionLabel
 
 
 func _ready() -> void:
 	_on_state_changed()
+	_version_label.text = "v. %s" % ProjectSettings.get_setting("application/config/version")
 
 
 func _on_state_changed() -> void:
@@ -121,9 +123,9 @@ func _rehearse() -> void:
 	_round_count_label.text = ""
 	var round_count: int = 0
 	
+	await create_tween().tween_interval(1.5).finished
 	for curr_round: Round in _challenge:
 		round_count += 1
-		await create_tween().tween_interval(1.5).finished
 		_stage_lights_controller.shine_light_on_leader()
 		_round_count_label.text = \
 				"Round %s of %s" % [round_count, _challenge.size()]
@@ -139,9 +141,10 @@ func _rehearse() -> void:
 		_stage_lights_controller.shine_light_on_player()
 		_player.attempt_steps(steps)
 		await _player.steps_completed
+		await create_tween().tween_interval(0.5).finished
 	_stage_lights_controller.turn_on_lights()
 	_leader.btn_map_wheel.hide()
-	await create_tween().tween_interval(2.0).finished
+	await create_tween().tween_interval(1.0).finished
 	_round_count_label.hide()
 	_rehearsals_count_label.hide()
 	SoundManager.play_sound(SFX_FINISHED)
@@ -181,13 +184,13 @@ func _participate_in_contest() -> void:
 	_stage_lights_controller.turn_off_lights()
 	await create_tween().tween_interval(0.5).finished
 	SoundManager.play_music(BGM)
+	await create_tween().tween_interval(1.5).finished
 	
 	_round_count_label.show()
 	_round_count_label.text = ""
 	var round_count: int = 0
 	for curr_round: Round in _challenge:
 		round_count += 1
-		await create_tween().tween_interval(1.5).finished
 		_stage_lights_controller.shine_light_on_leader()
 		_round_count_label.text = \
 				"Round %s of %s" % [round_count, _challenge.size()]
@@ -230,6 +233,7 @@ func _participate_in_contest() -> void:
 		_stage_lights_controller.shine_light_on_player()
 		_player.attempt_steps(steps)
 		await _player.steps_completed
+		await create_tween().tween_interval(0.5).finished
 	SoundManager.stop_music(1.0)
 	_stage_lights_controller.turn_on_lights()
 	_leader.btn_map_wheel.hide()
