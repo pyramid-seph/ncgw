@@ -23,5 +23,5 @@ Nail all steps to see the true ending!
 * Sound Manager addon is under the MIT Licencse.
 * All images are created by Pablo Enrique Morales Breck and are under the 
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license.
-* All images, BGM, SFX and UI sounds are under the Creative Commons Zero, CC0 license.
+* All BGM, SFX and UI sounds are under the Creative Commons Zero, CC0 license.
 * Kenney Fonts are made by Kenney and are under the Creative Commons Zero, CC0 license.
