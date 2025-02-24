@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2ksbbbmsut7t"]
+
+[ext_resource type="Texture2D" uid="uid://bbjwna7dqivjw" path="res://assets/art/spritesheet_dancer.png" id="1_nbvoo"]
+
+[node name="Person" type="Sprite2D"]
+self_modulate = Color(0, 0, 0, 1)
+texture = ExtResource("1_nbvoo")
+hframes = 7
+vframes = 7

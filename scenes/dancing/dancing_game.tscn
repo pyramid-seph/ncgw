@@ -1,0 +1,449 @@
+[gd_scene load_steps=16 format=3 uid="uid://xfqq48b1q036"]
+
+[ext_resource type="Script" path="res://scripts/dancing/dancing_game.gd" id="1_kx0tl"]
+[ext_resource type="Texture2D" uid="uid://co6r30obi8kbn" path="res://assets/art/theather_dummy.png" id="2_5wlxy"]
+[ext_resource type="Texture2D" uid="uid://3cn6jykd2yl5" path="res://assets/art/scenario_floor.png" id="3_qqb8f"]
+[ext_resource type="Texture2D" uid="uid://b42y3do43pjdj" path="res://assets/art/scenario_curtains_top.png" id="5_0g1uh"]
+[ext_resource type="FontFile" uid="uid://m3wbmrled4kn" path="res://assets/fonts/kenney/kenney_mini.ttf" id="5_0u7r0"]
+[ext_resource type="PackedScene" uid="uid://c7aiuxci678pf" path="res://scenes/dancing/player_dancer.tscn" id="5_3wonc"]
+[ext_resource type="PackedScene" uid="uid://b8u6nsahsfi2g" path="res://scenes/dancing/stage_lights_controller.tscn" id="5_b30ux"]
+[ext_resource type="PackedScene" uid="uid://c5rj4kagg4yy4" path="res://scenes/dancing/courtains.tscn" id="6_goyhv"]
+[ext_resource type="PackedScene" uid="uid://cxw48rle83veb" path="res://scenes/dancing/npc_dancer.tscn" id="6_oto48"]
+[ext_resource type="PackedScene" uid="uid://c2ksbbbmsut7t" path="res://scenes/dancing/person.tscn" id="9_5xqms"]
+[ext_resource type="Texture2D" uid="uid://mwyn28nfasra" path="res://assets/art/scenario_curtains_sides.png" id="9_cvv3v"]
+[ext_resource type="Texture2D" uid="uid://wh1l645h5omq" path="res://assets/art/scenario_walls.png" id="9_s5j1q"]
+[ext_resource type="Texture2D" uid="uid://bsaukh7qnmm6j" path="res://assets/art/foot.png" id="10_rhb4r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5gww3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1qk2a"]
+bg_color = Color(0, 0, 0, 0.901961)
+
+[node name="DancingGame" type="Node2D"]
+script = ExtResource("1_kx0tl")
+
+[node name="World" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Theater" type="Node2D" parent="World"]
+metadata/_edit_lock_ = true
+
+[node name="Void" type="ColorRect" parent="World/Theater"]
+offset_right = 320.0
+offset_bottom = 160.0
+color = Color(0.134649, 0.134649, 0.134649, 1)
+metadata/_edit_lock_ = true
+
+[node name="Floor" type="Sprite2D" parent="World/Theater"]
+texture_repeat = 3
+position = Vector2(17, 120)
+texture = ExtResource("3_qqb8f")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 286, 40)
+metadata/_edit_lock_ = true
+
+[node name="Leader" parent="World/Theater" instance=ExtResource("6_oto48")]
+unique_name_in_owner = true
+position = Vector2(120, 116)
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="World/Theater" instance=ExtResource("5_3wonc")]
+unique_name_in_owner = true
+position = Vector2(200, 116)
+_debug_show_btn_mapping = false
+metadata/_edit_lock_ = true
+
+[node name="DecorCourtainsSides" type="Sprite2D" parent="World/Theater"]
+texture_repeat = 3
+position = Vector2(17, 9)
+texture = ExtResource("9_cvv3v")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 286, 136)
+metadata/_edit_lock_ = true
+
+[node name="Foot" type="Sprite2D" parent="World/Theater"]
+unique_name_in_owner = true
+position = Vector2(60, -150)
+texture = ExtResource("10_rhb4r")
+centered = false
+
+[node name="StageLightsController" parent="World/Theater" instance=ExtResource("5_b30ux")]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="Courtains" parent="World/Theater" instance=ExtResource("6_goyhv")]
+unique_name_in_owner = true
+position = Vector2(16, -160)
+metadata/_edit_lock_ = true
+
+[node name="DecorCourtainsTop" type="Sprite2D" parent="World/Theater"]
+texture_repeat = 3
+position = Vector2(17, 9)
+texture = ExtResource("5_0g1uh")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 286, 136)
+metadata/_edit_lock_ = true
+
+[node name="Walls" type="Sprite2D" parent="World/Theater"]
+texture_repeat = 3
+texture = ExtResource("9_s5j1q")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 320, 180)
+metadata/_edit_lock_ = true
+
+[node name="Crowd" type="Node2D" parent="World/Theater"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, 180)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Person" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(9, 0)
+
+[node name="Person2" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(23, 0)
+frame = 21
+
+[node name="Person3" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(43, 0)
+frame = 29
+
+[node name="Person4" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(62, -6)
+frame = 38
+
+[node name="Person5" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(79, 7)
+frame = 33
+
+[node name="Person6" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(100, 0)
+frame = 23
+
+[node name="Person7" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(115, 0)
+
+[node name="Person8" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(149, 0)
+frame = 21
+
+[node name="Person9" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(187, 0)
+frame = 29
+
+[node name="Person10" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(133, -6)
+frame = 38
+
+[node name="Person11" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(170, 3)
+frame = 33
+
+[node name="Person12" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(206, 5)
+frame = 23
+
+[node name="Person13" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(222, 1)
+
+[node name="Person15" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(256, 1)
+frame = 29
+
+[node name="Person16" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(237, -5)
+frame = 38
+
+[node name="Person17" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(276, 1)
+frame = 33
+
+[node name="Person14" parent="World/Theater/Crowd/Person17" instance=ExtResource("9_5xqms")]
+position = Vector2(-4, 0)
+frame = 21
+
+[node name="Person18" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(315, 1)
+frame = 23
+
+[node name="Person19" parent="World/Theater/Crowd" instance=ExtResource("9_5xqms")]
+position = Vector2(292, 1)
+
+[node name="TheaterDummy" type="Sprite2D" parent="World"]
+visible = false
+texture = ExtResource("2_5wlxy")
+centered = false
+
+[node name="Ui" type="CanvasLayer" parent="."]
+
+[node name="Hud" type="PanelContainer" parent="Ui"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5gww3")
+
+[node name="FinishedLabel" type="PanelContainer" parent="Ui/Hud"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Label" type="RichTextLabel" parent="Ui/Hud/FinishedLabel"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("5_0u7r0")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center][wave amp=50.0 freq=5.0 connected=1]FINISHED![/wave][/center]"
+fit_content = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui/Hud"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 6
+
+[node name="RehearsalsCountLabel" type="Label" parent="Ui/Hud/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "Rehearsal 999"
+vertical_alignment = 1
+
+[node name="RoundCountLabel" type="Label" parent="Ui/Hud/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "Round 1 of 5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FailuresLabel" type="Label" parent="Ui/Hud/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "Fails: 30"
+vertical_alignment = 1
+
+[node name="Results" type="CenterContainer" parent="Ui/Hud"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Ui/Hud/Results"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_1qk2a")
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui/Hud/Results/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui/Hud/Results/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Ui/Hud/Results/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_0u7r0")
+text = "- Results -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NailedScoreLabel" type="Label" parent="Ui/Hud/Results/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "8 correct steps = 800"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RehearsalsScoreLabel" type="Label" parent="Ui/Hud/Results/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "8 rehearsals = -200"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TotalScoreLabel" type="Label" parent="Ui/Hud/Results/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "TOTAL: 600"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Ui/Hud/Results/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="YouAreLabel" type="Label" parent="Ui/Hud/Results/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "You are NOT perfect"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseResultsBtn" type="Button" parent="Ui/Hud/Results/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "OK"
+
+[node name="Darkness" type="ColorRect" parent="Ui"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Screens" type="CenterContainer" parent="Ui"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleScreen" type="VBoxContainer" parent="Ui/Screens"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Ui/Screens/TitleScreen"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("5_0u7r0")
+bbcode_enabled = true
+text = "[center]- Practice makes perfect -[/center]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="StartRehearsalBtn" type="Button" parent="Ui/Screens/TitleScreen"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_0u7r0")
+text = "Rehearse"
+
+[node name="ShowCreditsBtn" type="Button" parent="Ui/Screens/TitleScreen"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "Credits"
+
+[node name="VersionLabel" type="Label" parent="Ui/Screens/TitleScreen"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.29366, 0.29366, 0.29366, 1)
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "v 1.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FinishedRehearsalScreen" type="VBoxContainer" parent="Ui/Screens"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Ui/Screens/FinishedRehearsalScreen"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("5_0u7r0")
+bbcode_enabled = true
+text = "Ready for the contest?"
+fit_content = true
+autowrap_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/Screens/FinishedRehearsalScreen"]
+layout_mode = 2
+
+[node name="PracticeAgainBtn" type="Button" parent="Ui/Screens/FinishedRehearsalScreen/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 16
+text = "Rehearse"
+
+[node name="RealDealButton" type="Button" parent="Ui/Screens/FinishedRehearsalScreen/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 16
+text = "Let's do it!"
+
+[node name="PanelContainer" type="PanelContainer" parent="Ui/Screens/FinishedRehearsalScreen"]
+layout_mode = 2
+
+[node name="CreditsScreen" type="VBoxContainer" parent="Ui/Screens"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="RichTextLabel" type="Label" parent="Ui/Screens/CreditsScreen"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "- CODE, AUDIO AND SPRITES -
+Pyramid Seph
+---
+Uses Kenney  fonts
+(https://kenney.nl/)
+---
+Made with Godot 4.3
+Uses addons:  Sound Manager and ToDo Manager
+
+"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="ToTitleScreenBtn" type="Button" parent="Ui/Screens/CreditsScreen"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("5_0u7r0")
+theme_override_font_sizes/font_size = 8
+text = "To title screen"
+
+[connection signal="step_attempted" from="World/Theater/Player" to="." method="_on_player_step_attempted"]
+[connection signal="pressed" from="Ui/Screens/TitleScreen/StartRehearsalBtn" to="." method="_on_start_rehearsal_btn_pressed"]
+[connection signal="pressed" from="Ui/Screens/TitleScreen/ShowCreditsBtn" to="." method="_on_show_credits_btn_pressed"]
+[connection signal="pressed" from="Ui/Screens/FinishedRehearsalScreen/HBoxContainer/PracticeAgainBtn" to="." method="_on_practice_again_btn_pressed"]
+[connection signal="pressed" from="Ui/Screens/FinishedRehearsalScreen/HBoxContainer/RealDealButton" to="." method="_on_real_deal_button_pressed"]
+[connection signal="pressed" from="Ui/Screens/CreditsScreen/ToTitleScreenBtn" to="." method="_on_to_title_screen_btn_pressed"]
